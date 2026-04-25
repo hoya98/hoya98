@@ -814,6 +814,8 @@ const GAMES = [
           "Rotate your hands so palms face away. Bend your indexes down toward you to catch the far thumb string, then straighten. The figure unfolds into a wide curtain split down the middle.",
         tip:
           "If the door's edges look ragged, gently tug your pinkies outward and down to set the side rails.",
+        plate: "plates/apache-door/final.jpg",
+        plateCaption: "Fig. 21 (Jayne, 1906) — Apache Door",
         strings: [
           { from: "L1", to: "L5", curve: 0 },
           { from: "R1", to: "R5", curve: 0 },
@@ -969,6 +971,8 @@ const GAMES = [
         title: "Spread to open the wings",
         body:
           "Pull your hands smoothly apart. The wrist strings flare outward like wings; the centre loops form the slim body of the butterfly.",
+        plate: "plates/inuit-butterfly/final.jpg",
+        plateCaption: "Fig. 498 (Jayne, 1906) — A Butterfly",
         strings: [
           { points: ["L3", "Lwrist"], curve: 0 },
           { points: ["R3", "Rwrist"], curve: 0 },
