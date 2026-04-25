@@ -49,6 +49,8 @@ const GAMES = [
           "Slip the loop of string over both hands so it rests behind your four fingers (not the thumbs). The string runs across the back of your fingers and across your palms.",
         tip:
           "Keep your palms facing each other, fingers pointing up, hands about 25 cm apart.",
+        plate: "plates/opening-a/fig1.jpg",
+        plateCaption: "Fig. 1 (Jayne, 1906) — Position 1",
         strings: [
           { from: "L5", to: "R5", curve: 60, new: true }, // near string (palm side)
           { from: "L2", to: "R2", curve: -60, new: true }, // far string (back side)
@@ -58,6 +60,10 @@ const GAMES = [
         title: "Catch the palm string with your right middle finger",
         body:
           "Reach your right middle finger across and slide it under the string lying across your left palm. Pull that strand back toward your right hand.",
+        active: ["R3"],
+        arrow: { from: "R3", to: "Lpalm", curve: 60 },
+        plate: "plates/opening-a/fig2.jpg",
+        plateCaption: "Fig. 2 (Jayne, 1906) — First Opening, in progress",
         strings: [
           { from: "L5", to: "R5", curve: 60 },
           { from: "L2", to: "R2", curve: -60 },
@@ -74,6 +80,10 @@ const GAMES = [
           "Now reach your left middle finger under the string crossing your right palm and pull it back. Spread your hands gently to take up the slack.",
         tip:
           "You should now see two triangles meeting in the middle — the classic 'Opening A' shape.",
+        active: ["L3"],
+        arrow: { from: "L3", to: "Rpalm", curve: 60 },
+        plate: "plates/opening-a/fig3.jpg",
+        plateCaption: "Fig. 3 (Jayne, 1906) — First Opening, complete",
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -98,6 +108,8 @@ const GAMES = [
         title: "Wrap the loop twice around each hand",
         body:
           "Slip the loop over both hands and let it sit across the back of the four fingers. Then bring the loop around the back of each hand once more so the string crosses your palm twice.",
+        plate: "plates/opening-a/fig1.jpg",
+        plateCaption: "Fig. 1 (Jayne, 1906) — Position 1",
         strings: [
           { from: "L5", to: "R5", curve: 70, new: true },
           { from: "L5", to: "R5", curve: 30, new: true },
@@ -109,6 +121,8 @@ const GAMES = [
         title: "Hook the far palm string with the right middle finger",
         body:
           "Bring your right middle finger under the string that crosses your left palm and pull it back to your right hand.",
+        plate: "plates/opening-a/fig2.jpg",
+        plateCaption: "Fig. 2 (Jayne, 1906) — First Opening, in progress",
         strings: [
           { from: "L5", to: "R5", curve: 70 },
           { from: "L5", to: "R5", curve: 30 },
@@ -123,6 +137,8 @@ const GAMES = [
           "Reach your left middle finger under the string that now crosses your right palm and bring it back. Spread your hands to set the figure.",
         tip:
           "If both middle fingers are looped through the centre and your palms still hold the wraps, you've made Cat's Cradle.",
+        plate: "plates/cats-cradle/final.jpg",
+        plateCaption: "Fig. 741 (Jayne, 1906) — Cat's Cradle",
         strings: [
           { from: "L2", to: "R2", curve: -70 },
           { from: "L5", to: "R5", curve: 70 },
@@ -138,6 +154,8 @@ const GAMES = [
           "A partner pinches the two crossings between thumb and index finger of each hand, slides under the outer strings, and lifts away — transforming Cat's Cradle into the next figure (Soldier's Bed).",
         tip:
           "No partner? Just admire the symmetry. The figure is also called The Manger in some traditions.",
+        plate: "plates/cats-cradle/final.jpg",
+        plateCaption: "Fig. 741 (Jayne, 1906) — Cat's Cradle",
         strings: [
           { from: "L2", to: "R2", curve: -70 },
           { from: "L5", to: "R5", curve: 70 },
@@ -164,6 +182,8 @@ const GAMES = [
         title: "Begin with Opening A",
         body:
           "Make Opening A on your hands (loop behind the four fingers, then catch each palm string with the opposite middle finger).",
+        plate: "plates/opening-a/fig3.jpg",
+        plateCaption: "Fig. 3 (Jayne, 1906) — First Opening / Opening A",
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -172,9 +192,14 @@ const GAMES = [
         ],
       },
       {
-        title: "Drop the thumb loops (there aren't any yet)",
+        title: "Pick up the far string with both thumbs",
         body:
           "Bring both thumbs over the near string and under the far string, then up — picking up the far string on the back of each thumb.",
+        active: ["L1", "R1"],
+        arrow: [
+          { from: "L1", to: "L2", curve: -25 },
+          { from: "R1", to: "R2", curve: -25 },
+        ],
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -187,6 +212,7 @@ const GAMES = [
         title: "Release the little fingers",
         body:
           "Let the loops slip off both pinkies. The string near your palms drops away, leaving the cup's body suspended between your thumbs and middle fingers.",
+        active: ["L5", "R5"],
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L3", to: "R3", curve: -10 },
@@ -238,6 +264,11 @@ const GAMES = [
         title: "Tip the cup forward",
         body:
           "Bring both index fingers up and over the saucer string, then poke them down through the cup. You will end up holding the figure pointed away from you like a torch.",
+        active: ["L2", "R2"],
+        arrow: [
+          { from: "L2", to: "Lpalm", curve: -30 },
+          { from: "R2", to: "Rpalm", curve: -30 },
+        ],
         strings: [
           { from: "L1", to: "R1", curve: -10 },
           { from: "L3", to: "R3", curve: 10 },
@@ -254,6 +285,7 @@ const GAMES = [
           "Let the thumb loops drop. The figure swings into a long handle with a bushy end — the witch's broom.",
         tip:
           "Hold one hand above the other to make the broom 'stand up.'",
+        active: ["L1", "R1"],
         strings: [
           { from: "L3", to: "R3", curve: 10 },
           { points: ["L1", "L3"], curve: 0, loose: true },
@@ -280,6 +312,8 @@ const GAMES = [
         title: "Begin with Opening A",
         body:
           "Loop the string behind your fingers, then catch each palm string with the opposite middle finger. You should see two triangles meeting in the middle.",
+        plate: "plates/opening-a/fig3.jpg",
+        plateCaption: "Fig. 3 (Jayne, 1906) — First Opening / Opening A",
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -344,6 +378,8 @@ const GAMES = [
         title: "Position One",
         body:
           "Loop the string behind your four fingers (not the thumbs) so it rests across the back of each hand and across each palm.",
+        plate: "plates/opening-a/fig1.jpg",
+        plateCaption: "Fig. 1 (Jayne, 1906) — Position 1",
         strings: [
           { from: "L5", to: "R5", curve: 60, new: true },
           { from: "L2", to: "R2", curve: -60, new: true },
@@ -444,6 +480,8 @@ const GAMES = [
       {
         title: "Begin with Opening A",
         body: "Same opening as Cat's Cradle: loop behind the fingers, then catch each palm string with the opposite middle finger.",
+        plate: "plates/opening-a/fig3.jpg",
+        plateCaption: "Fig. 3 (Jayne, 1906) — First Opening / Opening A",
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -509,6 +547,8 @@ const GAMES = [
         title: "Have a partner hold Cat's Cradle",
         body:
           "Your partner stretches Cat's Cradle between their hands. Stand facing them with your palms open.",
+        plate: "plates/cats-cradle/final.jpg",
+        plateCaption: "Fig. 741 (Jayne, 1906) — Cat's Cradle",
         strings: [
           { from: "L2", to: "R2", curve: -70 },
           { from: "L5", to: "R5", curve: 70 },
@@ -535,6 +575,8 @@ const GAMES = [
           "Pull the two pinched crossings out to your sides, down under the outer strings, and back up through the centre. As you spread your hands, your partner releases.",
         tip:
           "Keep the pinch tight while you swing under — if the X slips you'll get a tangle instead of the bed.",
+        plate: "plates/soldiers-bed/final.jpg",
+        plateCaption: "Fig. 746 (Jayne, 1906) — Soldier's Bed",
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -559,6 +601,8 @@ const GAMES = [
         title: "Start with Soldier's Bed on a partner",
         body:
           "Your partner holds Soldier's Bed (two parallel rails plus crossed centre bars).",
+        plate: "plates/soldiers-bed/final.jpg",
+        plateCaption: "Fig. 746 (Jayne, 1906) — Soldier's Bed",
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -585,6 +629,8 @@ const GAMES = [
           "Drag the crossings down and outward, then sweep up between the two long rails. Spread your thumbs and pinkies as your partner lets go.",
         tip:
           "If you don't see two clean parallel verticals, you've snagged a rail — drop the loops, ask your partner to redo Soldier's Bed, and try again.",
+        plate: "plates/candles/final.jpg",
+        plateCaption: "Fig. 749 (Jayne, 1906) — Candles",
         strings: [
           { from: "L1", to: "L5" },
           { from: "R1", to: "R5" },
@@ -607,6 +653,8 @@ const GAMES = [
         title: "Start with Candles on a partner",
         body:
           "Your partner holds Candles — two parallel verticals stretched between their hands.",
+        plate: "plates/candles/final.jpg",
+        plateCaption: "Fig. 749 (Jayne, 1906) — Candles",
         strings: [
           { from: "L1", to: "L5" },
           { from: "R1", to: "R5" },
@@ -627,6 +675,8 @@ const GAMES = [
         title: "Twist away, take the figure",
         body:
           "Roll your wrists outward — thumbs sweep down and away, indexes sweep up — so each candle twists into a diamond. Spread to set the shape as your partner releases.",
+        plate: "plates/manger-diamonds/final.jpg",
+        plateCaption: "Fig. 745 (Jayne, 1906) — Diamonds / Cat's Eye",
         strings: [
           { from: "L1", to: "R1", curve: 30 },
           { from: "L2", to: "R2", curve: -30 },
@@ -653,6 +703,8 @@ const GAMES = [
         title: "Start with Diamonds on a partner",
         body:
           "Your partner holds Diamonds (two diamond windows side by side).",
+        plate: "plates/manger-diamonds/final.jpg",
+        plateCaption: "Fig. 745 (Jayne, 1906) — Diamonds",
         strings: [
           { from: "L1", to: "R1", curve: 30 },
           { from: "L2", to: "R2", curve: -30 },
@@ -679,6 +731,8 @@ const GAMES = [
           "Pull the pinched triangles up and apart while your partner releases. The outer strings round into a dish; the inner strings settle into a fish-shaped lozenge.",
         tip:
           "Wiggle one wrist gently — the 'fish' inside the dish will swim.",
+        plate: "plates/fish-in-a-dish/final.jpg",
+        plateCaption: "Fig. 753 (Jayne, 1906) — Fish in a Dish",
         strings: [
           { points: ["L1", [300, 320], "R1"], curve: 0 },
           { points: ["L2", [300, 80], "R2"], curve: 0 },
@@ -702,6 +756,8 @@ const GAMES = [
         title: "Start with Opening A",
         body:
           "Make Opening A on your hands.",
+        plate: "plates/opening-a/fig3.jpg",
+        plateCaption: "Fig. 3 (Jayne, 1906) — First Opening / Opening A",
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -784,6 +840,8 @@ const GAMES = [
         title: "Position One",
         body:
           "Loop the string behind the four fingers of each hand.",
+        plate: "plates/opening-a/fig1.jpg",
+        plateCaption: "Fig. 1 (Jayne, 1906) — Position 1",
         strings: [
           { from: "L2", to: "R2", curve: -60, new: true },
           { from: "L5", to: "R5", curve: 60, new: true },
@@ -863,6 +921,8 @@ const GAMES = [
         title: "Start with Opening A",
         body:
           "Loop behind the fingers, then catch each palm string with the opposite middle finger.",
+        plate: "plates/opening-a/fig3.jpg",
+        plateCaption: "Fig. 3 (Jayne, 1906) — First Opening / Opening A",
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -986,6 +1046,8 @@ const GAMES = [
         title: "Begin with Opening A",
         body:
           "Make Opening A on your hands.",
+        plate: "plates/opening-a/fig3.jpg",
+        plateCaption: "Fig. 3 (Jayne, 1906) — First Opening / Opening A",
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -1033,6 +1095,8 @@ const GAMES = [
         title: "Begin with Opening A",
         body:
           "Make Opening A on your hands.",
+        plate: "plates/opening-a/fig3.jpg",
+        plateCaption: "Fig. 3 (Jayne, 1906) — First Opening / Opening A",
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -1096,6 +1160,8 @@ const GAMES = [
         title: "Begin with Opening A",
         body:
           "Make Opening A on your hands.",
+        plate: "plates/opening-a/fig3.jpg",
+        plateCaption: "Fig. 3 (Jayne, 1906) — First Opening / Opening A",
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -1162,6 +1228,8 @@ const GAMES = [
         title: "Position One",
         body:
           "Loop the string behind the four fingers of each hand.",
+        plate: "plates/opening-a/fig1.jpg",
+        plateCaption: "Fig. 1 (Jayne, 1906) — Position 1",
         strings: [
           { from: "L2", to: "R2", curve: -60, new: true },
           { from: "L5", to: "R5", curve: 60, new: true },
@@ -1227,6 +1295,8 @@ const GAMES = [
         title: "Begin with Opening A",
         body:
           "Make Opening A on your hands.",
+        plate: "plates/opening-a/fig3.jpg",
+        plateCaption: "Fig. 3 (Jayne, 1906) — First Opening / Opening A",
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
