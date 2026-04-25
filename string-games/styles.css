@@ -263,6 +263,42 @@ main {
   height: 100%;
 }
 
+.stage.has-plate {
+  flex-direction: column;
+  aspect-ratio: auto;
+  padding: 14px;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.stage.has-plate svg {
+  height: auto;
+  max-height: 220px;
+}
+
+.plate {
+  margin: 0;
+  padding: 12px 0 0;
+  border-top: 1px dashed var(--line);
+  text-align: center;
+}
+
+.plate img {
+  max-width: 100%;
+  max-height: 260px;
+  height: auto;
+  border-radius: 4px;
+  filter: sepia(0.06);
+}
+
+.plate figcaption {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-top: 8px;
+  letter-spacing: 0.04em;
+}
+
 .step-body h2 {
   font-family: var(--serif);
   font-size: 22px;

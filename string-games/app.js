@@ -107,15 +107,30 @@
     const viewer = document.createElement("section");
     viewer.className = "viewer";
 
-    const stage = document.createElement("div");
-    stage.className = "stage";
     const stageStep = game.steps[stepIndex];
+    const stage = document.createElement("div");
+    stage.className = "stage" + (stageStep.plate ? " has-plate" : "");
     stage.appendChild(
       renderDiagram(stageStep.strings, {
         active: stageStep.active,
         arrow: stageStep.arrow,
       })
     );
+    if (stageStep.plate) {
+      const fig = document.createElement("figure");
+      fig.className = "plate";
+      const img = document.createElement("img");
+      img.src = stageStep.plate;
+      img.alt = stageStep.plateCaption || "Historical reference plate";
+      img.loading = "lazy";
+      fig.appendChild(img);
+      if (stageStep.plateCaption) {
+        const cap = document.createElement("figcaption");
+        cap.textContent = stageStep.plateCaption;
+        fig.appendChild(cap);
+      }
+      stage.appendChild(fig);
+    }
     viewer.appendChild(stage);
 
     const body = document.createElement("div");

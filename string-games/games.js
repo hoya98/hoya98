@@ -49,6 +49,8 @@ const GAMES = [
           "Slip the loop of string over both hands so it rests behind your four fingers (not the thumbs). The string runs across the back of your fingers and across your palms.",
         tip:
           "Keep your palms facing each other, fingers pointing up, hands about 25 cm apart.",
+        plate: "plates/opening-a/fig1.jpg",
+        plateCaption: "Fig. 1 (Jayne, 1906) — Position 1",
         strings: [
           { from: "L5", to: "R5", curve: 60, new: true }, // near string (palm side)
           { from: "L2", to: "R2", curve: -60, new: true }, // far string (back side)
@@ -60,6 +62,8 @@ const GAMES = [
           "Reach your right middle finger across and slide it under the string lying across your left palm. Pull that strand back toward your right hand.",
         active: ["R3"],
         arrow: { from: "R3", to: "Lpalm", curve: 60 },
+        plate: "plates/opening-a/fig2.jpg",
+        plateCaption: "Fig. 2 (Jayne, 1906) — First Opening, in progress",
         strings: [
           { from: "L5", to: "R5", curve: 60 },
           { from: "L2", to: "R2", curve: -60 },
@@ -78,6 +82,8 @@ const GAMES = [
           "You should now see two triangles meeting in the middle — the classic 'Opening A' shape.",
         active: ["L3"],
         arrow: { from: "L3", to: "Rpalm", curve: 60 },
+        plate: "plates/opening-a/fig3.jpg",
+        plateCaption: "Fig. 3 (Jayne, 1906) — First Opening, complete",
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
