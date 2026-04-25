@@ -33,11 +33,12 @@
     const intro = document.createElement("section");
     intro.className = "intro";
     intro.innerHTML = `
-      <h1>Learn Cat's Cradle and other string figures</h1>
+      <h1>Matilda's String Games</h1>
       <p>
-        Seven self-paced lessons. Each one shows the figure, walks you through
-        every move, and offers a tip when something usually goes wrong. All you
-        need is one closed loop of string.
+        Self-paced lessons in Cat's Cradle and other classic string figures.
+        Each one shows the figure, walks you through every move, and offers a
+        tip when something usually goes wrong. All you need is one closed loop
+        of string.
       </p>`;
     app.appendChild(intro);
 
