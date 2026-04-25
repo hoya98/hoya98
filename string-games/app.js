@@ -41,10 +41,37 @@
       </p>`;
     app.appendChild(intro);
 
-    const grid = document.createElement("div");
-    grid.className = "grid";
-    GAMES.forEach((game) => grid.appendChild(makeCard(game)));
-    app.appendChild(grid);
+    const order = [
+      "Foundations",
+      "Cat's Cradle Sequence",
+      "Classic Figures",
+      "World Traditions",
+      "Tricks & Magic",
+    ];
+    const groups = new Map();
+    GAMES.forEach((g) => {
+      const cat = g.category || "Other";
+      if (!groups.has(cat)) groups.set(cat, []);
+      groups.get(cat).push(g);
+    });
+    const sorted = [
+      ...order.filter((c) => groups.has(c)).map((c) => [c, groups.get(c)]),
+      ...[...groups.entries()].filter(([c]) => !order.includes(c)),
+    ];
+
+    sorted.forEach(([cat, games]) => {
+      const section = document.createElement("section");
+      section.className = "category";
+      const heading = document.createElement("h2");
+      heading.className = "category-title";
+      heading.textContent = cat;
+      section.appendChild(heading);
+      const grid = document.createElement("div");
+      grid.className = "grid";
+      games.forEach((game) => grid.appendChild(makeCard(game)));
+      section.appendChild(grid);
+      app.appendChild(section);
+    });
 
     const glossary = document.createElement("section");
     glossary.className = "glossary";

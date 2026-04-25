@@ -37,6 +37,7 @@ const GAMES = [
   {
     id: "opening-a",
     title: "Opening A",
+    category: "Foundations",
     difficulty: 1,
     minutes: 2,
     blurb:
@@ -87,6 +88,7 @@ const GAMES = [
   {
     id: "cats-cradle",
     title: "Cat's Cradle",
+    category: "Cat's Cradle Sequence",
     difficulty: 1,
     minutes: 3,
     blurb:
@@ -152,6 +154,7 @@ const GAMES = [
   {
     id: "cup-and-saucer",
     title: "Cup and Saucer",
+    category: "Classic Figures",
     difficulty: 1,
     minutes: 3,
     blurb:
@@ -213,6 +216,7 @@ const GAMES = [
   {
     id: "witchs-broom",
     title: "Witch's Broom",
+    category: "Classic Figures",
     difficulty: 2,
     minutes: 3,
     blurb:
@@ -266,6 +270,7 @@ const GAMES = [
   {
     id: "eiffel-tower",
     title: "Eiffel Tower",
+    category: "Classic Figures",
     difficulty: 2,
     minutes: 4,
     blurb:
@@ -329,6 +334,7 @@ const GAMES = [
   {
     id: "jacobs-ladder",
     title: "Jacob's Ladder",
+    category: "Classic Figures",
     difficulty: 3,
     minutes: 6,
     blurb:
@@ -429,6 +435,7 @@ const GAMES = [
   {
     id: "cats-whiskers",
     title: "Cat's Whiskers",
+    category: "Classic Figures",
     difficulty: 2,
     minutes: 3,
     blurb:
@@ -487,4 +494,506 @@ const GAMES = [
       },
     ],
   },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "soldiers-bed",
+    title: "Soldier's Bed",
+    category: "Cat's Cradle Sequence",
+    difficulty: 1,
+    minutes: 2,
+    blurb:
+      "The first transform out of Cat's Cradle. A neat rectangle with two long parallel rails and a pair of slanting bars across the middle.",
+    steps: [
+      {
+        title: "Have a partner hold Cat's Cradle",
+        body:
+          "Your partner stretches Cat's Cradle between their hands. Stand facing them with your palms open.",
+        strings: [
+          { from: "L2", to: "R2", curve: -70 },
+          { from: "L5", to: "R5", curve: 70 },
+          { from: "L3", to: "R3", curve: -25 },
+          { from: "L3", to: "R3", curve: 25 },
+          { points: ["L2", "R3"], curve: -10 },
+          { points: ["R2", "L3"], curve: -10 },
+        ],
+      },
+      {
+        title: "Pinch the two crosses",
+        body:
+          "Reach into the figure and pinch each X (where the centre strings cross) between your thumb and index finger — left X with your left hand, right X with your right.",
+        strings: [
+          { from: "L2", to: "R2", curve: -70 },
+          { from: "L5", to: "R5", curve: 70 },
+          { points: ["L2", "R3"], curve: -10, new: true },
+          { points: ["R2", "L3"], curve: -10, new: true },
+        ],
+      },
+      {
+        title: "Down, around, up through the middle",
+        body:
+          "Pull the two pinched crossings out to your sides, down under the outer strings, and back up through the centre. As you spread your hands, your partner releases.",
+        tip:
+          "Keep the pinch tight while you swing under — if the X slips you'll get a tangle instead of the bed.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L1", to: "R1", curve: 0, new: true },
+          { from: "L1", to: "R1", curve: -10, new: true },
+        ],
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "candles",
+    title: "Candles",
+    category: "Cat's Cradle Sequence",
+    difficulty: 2,
+    minutes: 2,
+    blurb:
+      "Also called Chopsticks. Two long, perfectly parallel strings — the next handoff after Soldier's Bed.",
+    steps: [
+      {
+        title: "Start with Soldier's Bed on a partner",
+        body:
+          "Your partner holds Soldier's Bed (two parallel rails plus crossed centre bars).",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L1", to: "R1", curve: 0 },
+          { from: "L1", to: "R1", curve: -10 },
+        ],
+      },
+      {
+        title: "Hook the centre crossings with little fingers",
+        body:
+          "Reach your little fingers in from the outside and hook each centre crossing — left pinky catches the left X, right pinky catches the right.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L1", to: "R1", curve: 0 },
+          { from: "L1", to: "R1", curve: -10 },
+          { points: ["L5", "Lpalm"], curve: 0, new: true },
+          { points: ["R5", "Rpalm"], curve: 0, new: true },
+        ],
+      },
+      {
+        title: "Pull down and out, then up through the rails",
+        body:
+          "Drag the crossings down and outward, then sweep up between the two long rails. Spread your thumbs and pinkies as your partner lets go.",
+        tip:
+          "If you don't see two clean parallel verticals, you've snagged a rail — drop the loops, ask your partner to redo Soldier's Bed, and try again.",
+        strings: [
+          { from: "L1", to: "L5" },
+          { from: "R1", to: "R5" },
+        ],
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "manger-diamonds",
+    title: "Diamonds",
+    category: "Cat's Cradle Sequence",
+    difficulty: 2,
+    minutes: 2,
+    blurb:
+      "Also called Cat's Eye or the Manger. Two diamond-shaped windows centred between your hands.",
+    steps: [
+      {
+        title: "Start with Candles on a partner",
+        body:
+          "Your partner holds Candles — two parallel verticals stretched between their hands.",
+        strings: [
+          { from: "L1", to: "L5" },
+          { from: "R1", to: "R5" },
+        ],
+      },
+      {
+        title: "Thumbs and indexes in, from above",
+        body:
+          "Bring both thumbs in from outside-below the candles and both index fingers in from above. Pinch each candle between thumb and index.",
+        strings: [
+          { from: "L1", to: "L5" },
+          { from: "R1", to: "R5" },
+          { points: ["L1", "L2"], curve: 0, new: true },
+          { points: ["R1", "R2"], curve: 0, new: true },
+        ],
+      },
+      {
+        title: "Twist away, take the figure",
+        body:
+          "Roll your wrists outward — thumbs sweep down and away, indexes sweep up — so each candle twists into a diamond. Spread to set the shape as your partner releases.",
+        strings: [
+          { from: "L1", to: "R1", curve: 30 },
+          { from: "L2", to: "R2", curve: -30 },
+          { points: ["L1", [240, 200], "L2"] },
+          { points: ["R1", [360, 200], "R2"] },
+          { points: ["L2", [300, 170], "R2"] },
+          { points: ["L1", [300, 240], "R1"] },
+        ],
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "fish-in-a-dish",
+    title: "Fish in a Dish",
+    category: "Cat's Cradle Sequence",
+    difficulty: 2,
+    minutes: 2,
+    blurb:
+      "The traditional last figure of the Cat's Cradle handoff sequence — an oval dish with a fish-shaped lozenge inside.",
+    steps: [
+      {
+        title: "Start with Diamonds on a partner",
+        body:
+          "Your partner holds Diamonds (two diamond windows side by side).",
+        strings: [
+          { from: "L1", to: "R1", curve: 30 },
+          { from: "L2", to: "R2", curve: -30 },
+          { points: ["L1", [240, 200], "L2"] },
+          { points: ["R1", [360, 200], "R2"] },
+          { points: ["L2", [300, 170], "R2"] },
+          { points: ["L1", [300, 240], "R1"] },
+        ],
+      },
+      {
+        title: "Pinch the centre triangles",
+        body:
+          "Reach in and pinch the small triangles at the centre top and centre bottom of the figure between thumb and index of each hand.",
+        strings: [
+          { from: "L1", to: "R1", curve: 30 },
+          { from: "L2", to: "R2", curve: -30 },
+          { points: ["L2", [300, 170], "R2"], new: true },
+          { points: ["L1", [300, 240], "R1"], new: true },
+        ],
+      },
+      {
+        title: "Lift up and spread",
+        body:
+          "Pull the pinched triangles up and apart while your partner releases. The outer strings round into a dish; the inner strings settle into a fish-shaped lozenge.",
+        tip:
+          "Wiggle one wrist gently — the 'fish' inside the dish will swim.",
+        strings: [
+          { points: ["L1", [300, 320], "R1"], curve: 0 },
+          { points: ["L2", [300, 80], "R2"], curve: 0 },
+          { points: ["L3", [260, 200], "R3", [340, 200], "L3"], curve: 0 },
+        ],
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "apache-door",
+    title: "Apache Door",
+    category: "Classic Figures",
+    difficulty: 3,
+    minutes: 5,
+    blurb:
+      "A wide curtain with an opening down the middle — the entrance to a brush house. One of the great showpiece figures.",
+    steps: [
+      {
+        title: "Start with Opening A",
+        body:
+          "Make Opening A on your hands.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+        ],
+      },
+      {
+        title: "Thumbs over and pick up the far middle string",
+        body:
+          "Bring each thumb over the near index string, over both middle strings, and under the far middle string. Lift to bring it back on the thumb.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+          { from: "L1", to: "R1", curve: -25, new: true },
+        ],
+      },
+      {
+        title: "Drop the middle fingers",
+        body:
+          "Release both middle finger loops. Spread to take up the slack.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L1", to: "R1", curve: -25 },
+          { from: "L3", to: "R3", curve: -10, loose: true },
+          { from: "L3", to: "R3", curve: 10, loose: true },
+        ],
+      },
+      {
+        title: "Pass the index loops over the thumbs",
+        body:
+          "Lift each index loop over your thumb and let it drop behind. Each thumb now has the original thumb loop and the old index loop above it.",
+        strings: [
+          { from: "L1", to: "R1", curve: -25 },
+          { from: "L1", to: "R1", curve: -10, new: true },
+          { from: "L5", to: "R5", curve: 60 },
+        ],
+      },
+      {
+        title: "Navaho the thumbs",
+        body:
+          "On each hand, pick up the lower thumb loop with your teeth or other hand and lift it over the upper loop, dropping it off the thumb. Only the upper loop remains.",
+        strings: [
+          { from: "L1", to: "R1", curve: -10 },
+          { from: "L5", to: "R5", curve: 60 },
+        ],
+      },
+      {
+        title: "Turn the palms forward to open the door",
+        body:
+          "Rotate your hands so palms face away. Bend your indexes down toward you to catch the far thumb string, then straighten. The figure unfolds into a wide curtain split down the middle.",
+        tip:
+          "If the door's edges look ragged, gently tug your pinkies outward and down to set the side rails.",
+        strings: [
+          { from: "L1", to: "L5", curve: 0 },
+          { from: "R1", to: "R5", curve: 0 },
+          { points: ["L1", [260, 200], "L5"] },
+          { points: ["R1", [340, 200], "R5"] },
+          { from: "L2", to: "R2", curve: -40 },
+          { from: "L1", to: "R1", curve: 60 },
+        ],
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "many-stars",
+    title: "Many Stars",
+    category: "Classic Figures",
+    difficulty: 3,
+    minutes: 6,
+    blurb:
+      "A row of small star shapes across the centre of the figure. Sometimes called Five Stars or Six Stars depending on how it settles.",
+    steps: [
+      {
+        title: "Position One",
+        body:
+          "Loop the string behind the four fingers of each hand.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60, new: true },
+          { from: "L5", to: "R5", curve: 60, new: true },
+        ],
+      },
+      {
+        title: "Thumbs pick up the far pinky string",
+        body:
+          "Reach each thumb over the near string, then under the far string and back. Each thumb now carries a loop.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L1", to: "R1", curve: -20, new: true },
+        ],
+      },
+      {
+        title: "Indexes pick up the far thumb string",
+        body:
+          "Bring each index finger from above down between the thumb strings, hook the far thumb string, and pull it back.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L1", to: "R1", curve: -20 },
+          { from: "L2", to: "R2", curve: 0, new: true },
+        ],
+      },
+      {
+        title: "Twist the index loops",
+        body:
+          "Rotate each index downward, away from you, and back up — putting one full twist in each index loop.",
+        strings: [
+          { from: "L2", to: "R2", curve: -40 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L1", to: "R1", curve: -20 },
+          { from: "L2", to: "R2", curve: 5 },
+          { points: ["L2", [240, 160], "R2", [360, 160], "L2"], curve: 0, new: true },
+        ],
+      },
+      {
+        title: "Pinkies pick up the far index string from below",
+        body:
+          "Bend each pinky over the far pinky string and back under the new far index string, picking it up. Drop the original pinky string.",
+        strings: [
+          { from: "L2", to: "R2", curve: -40 },
+          { from: "L1", to: "R1", curve: -20 },
+          { from: "L5", to: "R5", curve: 60, new: true },
+          { points: ["L2", [240, 160], "R2", [360, 160], "L2"], curve: 0 },
+        ],
+      },
+      {
+        title: "Drop the thumbs and turn out",
+        body:
+          "Release the thumb loops. Rotate your hands so the palms face forward and pull gently. A row of small stars appears across the middle.",
+        tip:
+          "Don't yank — Many Stars settles slowly. Apply tension by inches, not by feet.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          // five stars across
+          ...starsRow(5),
+        ],
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "inuit-butterfly",
+    title: "Inuit Butterfly",
+    category: "World Traditions",
+    difficulty: 2,
+    minutes: 4,
+    blurb:
+      "A symmetrical figure from the Arctic — two outstretched wings meeting at a slim body in the middle.",
+    steps: [
+      {
+        title: "Start with Opening A",
+        body:
+          "Loop behind the fingers, then catch each palm string with the opposite middle finger.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+        ],
+      },
+      {
+        title: "Pass the index loops over the wrist",
+        body:
+          "Lift the loop on each index finger up, over your hand, and let it drop behind your wrist.",
+        strings: [
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+          { from: "Lwrist", to: "Rwrist", curve: -120, new: true },
+        ],
+      },
+      {
+        title: "Pass the pinky loops over the wrist too",
+        body:
+          "Now lift each pinky loop up, over the hand, and drop it behind the wrist alongside the index loops.",
+        strings: [
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+          { from: "Lwrist", to: "Rwrist", curve: -120 },
+          { from: "Lwrist", to: "Rwrist", curve: 120, new: true },
+        ],
+      },
+      {
+        title: "Bring the middle loops down between the wrist strings",
+        body:
+          "Bend each middle finger forward and down, carrying its loop between the two strings on its wrist. Then straighten the fingers up.",
+        strings: [
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+          { from: "Lwrist", to: "Rwrist", curve: -120 },
+          { from: "Lwrist", to: "Rwrist", curve: 120 },
+          { points: ["L3", "Lwrist"], new: true },
+          { points: ["R3", "Rwrist"], new: true },
+        ],
+      },
+      {
+        title: "Spread to open the wings",
+        body:
+          "Pull your hands smoothly apart. The wrist strings flare outward like wings; the centre loops form the slim body of the butterfly.",
+        strings: [
+          { points: ["L3", "Lwrist"], curve: 0 },
+          { points: ["R3", "Rwrist"], curve: 0 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+          { points: ["Lwrist", [220, 350], [300, 280], [380, 350], "Rwrist"], curve: 0 },
+          { points: ["Lwrist", [220, 60], [300, 130], [380, 60], "Rwrist"], curve: 0 },
+        ],
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "cutting-off-head",
+    title: "Cutting Off the Head",
+    category: "Tricks & Magic",
+    difficulty: 2,
+    minutes: 2,
+    blurb:
+      "A magic-trick figure: the loop seems to wrap around your friend's neck, then comes free without touching them. Always do it gently and with consent.",
+    steps: [
+      {
+        title: "Hold the loop horizontally",
+        body:
+          "Stretch the loop between both hands, palms facing your friend, the string running side to side at neck height.",
+        strings: [
+          { from: "L1", to: "R1", curve: -10, new: true },
+          { from: "L1", to: "R1", curve: 10, new: true },
+        ],
+      },
+      {
+        title: "Cross your wrists",
+        body:
+          "Cross your right hand over your left so the strings form an X in front of you. Make sure each hand still holds its own end.",
+        strings: [
+          { points: ["L1", [350, 220], "R1"], new: true },
+          { points: ["L1", [250, 220], "R1"], new: true },
+        ],
+      },
+      {
+        title: "Loop around the neck (gently)",
+        body:
+          "Bring the front strand around behind your friend's neck so the loop appears to encircle them. The crossed wrists hide the trick.",
+        strings: [
+          { points: ["L1", [300, 100], "R1"], curve: 0 },
+          { points: ["L1", [300, 280], "R1"], curve: 0 },
+        ],
+      },
+      {
+        title: "Snap your hands apart",
+        body:
+          "Quickly pull your hands straight out. Because of the cross, the string slides cleanly past — appearing to pass through the neck.",
+        tip:
+          "Practise it on a chair back first. Pull only along the line of the string; never yank toward yourself.",
+        strings: [
+          { from: "L1", to: "R1", curve: -10 },
+          { from: "L1", to: "R1", curve: 10 },
+        ],
+      },
+    ],
+  },
 ];
+
+/* Helpers used by some of the diagrams above. */
+function starsRow(n) {
+  const out = [];
+  const left = 180;
+  const right = 420;
+  const step = (right - left) / (n - 1);
+  const y = 200;
+  for (let i = 0; i < n; i++) {
+    const cx = left + step * i;
+    out.push({ points: starShape(cx, y, 18), curve: 0 });
+  }
+  return out;
+}
+
+function starShape(cx, cy, r) {
+  // 5-point star polyline
+  const pts = [];
+  for (let i = 0; i <= 10; i++) {
+    const a = (-Math.PI / 2) + (i * Math.PI) / 5;
+    const rr = i % 2 === 0 ? r : r * 0.42;
+    pts.push([Math.round(cx + Math.cos(a) * rr), Math.round(cy + Math.sin(a) * rr)]);
+  }
+  return pts;
+}
