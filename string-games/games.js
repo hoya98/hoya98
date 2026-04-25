@@ -58,6 +58,8 @@ const GAMES = [
         title: "Catch the palm string with your right middle finger",
         body:
           "Reach your right middle finger across and slide it under the string lying across your left palm. Pull that strand back toward your right hand.",
+        active: ["R3"],
+        arrow: { from: "R3", to: "Lpalm", curve: 60 },
         strings: [
           { from: "L5", to: "R5", curve: 60 },
           { from: "L2", to: "R2", curve: -60 },
@@ -74,6 +76,8 @@ const GAMES = [
           "Now reach your left middle finger under the string crossing your right palm and pull it back. Spread your hands gently to take up the slack.",
         tip:
           "You should now see two triangles meeting in the middle — the classic 'Opening A' shape.",
+        active: ["L3"],
+        arrow: { from: "L3", to: "Rpalm", curve: 60 },
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -172,9 +176,14 @@ const GAMES = [
         ],
       },
       {
-        title: "Drop the thumb loops (there aren't any yet)",
+        title: "Pick up the far string with both thumbs",
         body:
           "Bring both thumbs over the near string and under the far string, then up — picking up the far string on the back of each thumb.",
+        active: ["L1", "R1"],
+        arrow: [
+          { from: "L1", to: "L2", curve: -25 },
+          { from: "R1", to: "R2", curve: -25 },
+        ],
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L5", to: "R5", curve: 60 },
@@ -187,6 +196,7 @@ const GAMES = [
         title: "Release the little fingers",
         body:
           "Let the loops slip off both pinkies. The string near your palms drops away, leaving the cup's body suspended between your thumbs and middle fingers.",
+        active: ["L5", "R5"],
         strings: [
           { from: "L2", to: "R2", curve: -60 },
           { from: "L3", to: "R3", curve: -10 },
@@ -238,6 +248,11 @@ const GAMES = [
         title: "Tip the cup forward",
         body:
           "Bring both index fingers up and over the saucer string, then poke them down through the cup. You will end up holding the figure pointed away from you like a torch.",
+        active: ["L2", "R2"],
+        arrow: [
+          { from: "L2", to: "Lpalm", curve: -30 },
+          { from: "R2", to: "Rpalm", curve: -30 },
+        ],
         strings: [
           { from: "L1", to: "R1", curve: -10 },
           { from: "L3", to: "R3", curve: 10 },
@@ -254,6 +269,7 @@ const GAMES = [
           "Let the thumb loops drop. The figure swings into a long handle with a bushy end — the witch's broom.",
         tip:
           "Hold one hand above the other to make the broom 'stand up.'",
+        active: ["L1", "R1"],
         strings: [
           { from: "L3", to: "R3", curve: 10 },
           { points: ["L1", "L3"], curve: 0, loose: true },

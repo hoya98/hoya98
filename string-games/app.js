@@ -109,7 +109,13 @@
 
     const stage = document.createElement("div");
     stage.className = "stage";
-    stage.appendChild(renderDiagram(game.steps[stepIndex].strings));
+    const stageStep = game.steps[stepIndex];
+    stage.appendChild(
+      renderDiagram(stageStep.strings, {
+        active: stageStep.active,
+        arrow: stageStep.arrow,
+      })
+    );
     viewer.appendChild(stage);
 
     const body = document.createElement("div");
@@ -199,64 +205,186 @@
     return btn;
   }
 
-  function renderDiagram(strings, compact) {
-    const svgNS = "http://www.w3.org/2000/svg";
-    const svg = document.createElementNS(svgNS, "svg");
+  function renderDiagram(strings, compactOrOpts, maybeOpts) {
+    // Backward compatible: renderDiagram(strings, compact) still works.
+    // New form: renderDiagram(strings, { compact, active, arrow, labels })
+    const opts =
+      typeof compactOrOpts === "object" && compactOrOpts !== null
+        ? compactOrOpts
+        : { compact: !!compactOrOpts, ...(maybeOpts || {}) };
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(NS, "svg");
     svg.setAttribute("viewBox", "0 0 600 400");
-    svg.setAttribute("xmlns", svgNS);
+    svg.setAttribute("xmlns", NS);
 
-    drawHand(svg, "L");
-    drawHand(svg, "R");
+    // Arrowhead marker for move-direction arrows
+    if (!opts.compact) {
+      const defs = document.createElementNS(NS, "defs");
+      const marker = document.createElementNS(NS, "marker");
+      marker.setAttribute("id", "arrowhead");
+      marker.setAttribute("viewBox", "0 0 10 10");
+      marker.setAttribute("refX", "9");
+      marker.setAttribute("refY", "5");
+      marker.setAttribute("markerWidth", "7");
+      marker.setAttribute("markerHeight", "7");
+      marker.setAttribute("orient", "auto");
+      const head = document.createElementNS(NS, "path");
+      head.setAttribute("d", "M 0 0 L 10 5 L 0 10 z");
+      head.setAttribute("fill", "#c0432c");
+      marker.appendChild(head);
+      defs.appendChild(marker);
+      svg.appendChild(defs);
+    }
 
-    (strings || []).forEach((s) => drawString(svg, s, compact));
+    drawHand(svg, "L", opts);
+    drawHand(svg, "R", opts);
+
+    (strings || []).forEach((s) => drawString(svg, s, opts.compact));
+
+    if (!opts.compact && opts.arrow) {
+      const arrows = Array.isArray(opts.arrow) ? opts.arrow : [opts.arrow];
+      arrows.forEach((a) => drawArrow(svg, a));
+    }
 
     return svg;
   }
 
-  function drawHand(svg, side) {
-    const svgNS = "http://www.w3.org/2000/svg";
+  function drawHand(svg, side, opts) {
+    const NS = "http://www.w3.org/2000/svg";
     const sign = side === "L" ? 1 : -1;
     const cx = side === "L" ? 165 : 435;
+    const active = (opts && opts.active) || [];
+    const compact = opts && opts.compact;
+    const isActive = (id) => active.indexOf(id) >= 0;
 
-    // Palm
-    const palm = document.createElementNS(svgNS, "rect");
-    palm.setAttribute("x", cx - 38);
-    palm.setAttribute("y", 200);
-    palm.setAttribute("width", 76);
-    palm.setAttribute("height", 110);
-    palm.setAttribute("rx", 22);
-    palm.setAttribute("class", "hand");
+    // Palm + thumb-pad: a single shaped path with a slight bulge on the
+    // outside (thumb side) and a tapered wrist.
+    const palm = document.createElementNS(NS, "path");
+    const palmD = [
+      `M ${cx + 38 * sign} 200`,
+      `L ${cx + 40 * sign} 290`,
+      `Q ${cx + 36 * sign} 322, ${cx + 18 * sign} 326`,
+      `L ${cx - 22 * sign} 326`,
+      `Q ${cx - 40 * sign} 326, ${cx - 44 * sign} 295`,
+      `L ${cx - 50 * sign} 250`,
+      `Q ${cx - 62 * sign} 220, ${cx - 38 * sign} 200`,
+      `Z`,
+    ].join(" ");
+    palm.setAttribute("d", palmD);
+    palm.setAttribute("class", "hand palm");
     svg.appendChild(palm);
 
-    // Fingers (4) + thumb
+    if (!compact) {
+      // subtle palm crease
+      const crease = document.createElementNS(NS, "path");
+      crease.setAttribute(
+        "d",
+        `M ${cx - 25 * sign} 248 Q ${cx} 258, ${cx + 25 * sign} 252`
+      );
+      crease.setAttribute("class", "hand-detail");
+      svg.appendChild(crease);
+    }
+
+    // 4 fingers (index, middle, ring, pinky). x = cx + offset*sign so that
+    // the right hand mirrors correctly (previous code drew index/ring on
+    // the wrong side of the right hand).
     const fingers = [
-      { num: 2, x: cx - 23, top: 130 },
-      { num: 3, x: cx, top: 110 },
-      { num: 4, x: cx + 23, top: 122 },
-      { num: 5, x: cx + 45 * (side === "L" ? 1 : -1), top: 152 },
+      { id: side + "2", x: cx - 23 * sign, top: 130, label: "I" },
+      { id: side + "3", x: cx,             top: 110, label: "M" },
+      { id: side + "4", x: cx + 23 * sign, top: 122, label: "R" },
+      { id: side + "5", x: cx + 45 * sign, top: 152, label: "L" },
     ];
+
     fingers.forEach((f) => {
-      const finger = document.createElementNS(svgNS, "rect");
-      finger.setAttribute("x", f.x - 9);
-      finger.setAttribute("y", f.top);
-      finger.setAttribute("width", 18);
-      finger.setAttribute("height", 200 - f.top + 6);
-      finger.setAttribute("rx", 9);
-      finger.setAttribute("class", "hand");
+      const w = 9;
+      const tipR = 9;
+      const finger = document.createElementNS(NS, "path");
+      finger.setAttribute(
+        "d",
+        [
+          `M ${f.x - w} 200`,
+          `L ${f.x - w} ${f.top + tipR}`,
+          `Q ${f.x - w} ${f.top}, ${f.x} ${f.top}`,
+          `Q ${f.x + w} ${f.top}, ${f.x + w} ${f.top + tipR}`,
+          `L ${f.x + w} 200`,
+          `Z`,
+        ].join(" ")
+      );
+      finger.setAttribute(
+        "class",
+        "hand finger" + (isActive(f.id) ? " active" : "")
+      );
       svg.appendChild(finger);
+
+      if (!compact) {
+        // knuckle hint
+        const ky = (f.top + 200) / 2 + 6;
+        const knuckle = document.createElementNS(NS, "path");
+        knuckle.setAttribute(
+          "d",
+          `M ${f.x - 5} ${ky} Q ${f.x} ${ky + 2}, ${f.x + 5} ${ky}`
+        );
+        knuckle.setAttribute("class", "hand-detail");
+        svg.appendChild(knuckle);
+
+        // finger label above the tip
+        const label = document.createElementNS(NS, "text");
+        label.setAttribute("x", f.x);
+        label.setAttribute("y", f.top - 8);
+        label.setAttribute("class", "finger-label");
+        label.textContent = f.label;
+        svg.appendChild(label);
+      }
     });
 
-    // Thumb (slanted) — draw as rotated rect
-    const thumb = document.createElementNS(svgNS, "rect");
-    const thumbX = cx - 55 * sign;
-    thumb.setAttribute("x", thumbX - 9);
-    thumb.setAttribute("y", 200);
-    thumb.setAttribute("width", 18);
-    thumb.setAttribute("height", 70);
-    thumb.setAttribute("rx", 9);
-    thumb.setAttribute("transform", `rotate(${30 * sign} ${thumbX} 235)`);
-    thumb.setAttribute("class", "hand");
+    // Thumb — angled, tapered, drawn in local coords then transformed
+    const thumbId = side + "1";
+    const thumb = document.createElementNS(NS, "path");
+    const tw = 10;
+    const tlen = 65;
+    thumb.setAttribute(
+      "d",
+      [
+        `M ${-tw} 0`,
+        `L ${-tw} ${tlen - tw}`,
+        `Q ${-tw} ${tlen}, 0 ${tlen}`,
+        `Q ${tw} ${tlen}, ${tw} ${tlen - tw}`,
+        `L ${tw} 0`,
+        `Z`,
+      ].join(" ")
+    );
+    thumb.setAttribute(
+      "transform",
+      `translate(${cx - 50 * sign}, 215) rotate(${30 * sign})`
+    );
+    thumb.setAttribute(
+      "class",
+      "hand thumb" + (isActive(thumbId) ? " active" : "")
+    );
     svg.appendChild(thumb);
+
+    if (!compact) {
+      const tLabel = document.createElementNS(NS, "text");
+      tLabel.setAttribute("x", cx - 78 * sign);
+      tLabel.setAttribute("y", 295);
+      tLabel.setAttribute("class", "finger-label");
+      tLabel.textContent = "T";
+      svg.appendChild(tLabel);
+    }
+  }
+
+  function drawArrow(svg, arrow) {
+    const NS = "http://www.w3.org/2000/svg";
+    const a = ANCHORS[arrow.from] || arrow.from;
+    const b = ANCHORS[arrow.to] || arrow.to;
+    if (!a || !b) return;
+    const mx = (a[0] + b[0]) / 2 + (arrow.dx || 0);
+    const my = (a[1] + b[1]) / 2 + (arrow.curve || 0);
+    const path = document.createElementNS(NS, "path");
+    path.setAttribute("d", `M ${a[0]} ${a[1]} Q ${mx} ${my} ${b[0]} ${b[1]}`);
+    path.setAttribute("class", "arrow");
+    path.setAttribute("marker-end", "url(#arrowhead)");
+    svg.appendChild(path);
   }
 
   function drawString(svg, s, compact) {
