@@ -971,6 +971,421 @@ const GAMES = [
       },
     ],
   },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "owl",
+    title: "Owl",
+    category: "World Traditions",
+    difficulty: 2,
+    minutes: 3,
+    blurb:
+      "An Inuit figure with two large round eyes and a small body below. Said to bring wisdom to those who learn it.",
+    steps: [
+      {
+        title: "Begin with Opening A",
+        body:
+          "Make Opening A on your hands.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+        ],
+      },
+      {
+        title: "Twist each middle finger loop twice",
+        body:
+          "Rotate each middle finger forward, down, back and up — putting one full twist into each centre loop. Do it again so each loop has two twists.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { points: ["L3", [240, 200], "R3"], curve: 0 },
+          { points: ["L3", [360, 200], "R3"], curve: 0, new: true },
+        ],
+      },
+      {
+        title: "Drop the indexes and pinkies",
+        body:
+          "Release both index and both pinky loops at once. The two twisted centre loops puff into round eyes; the surplus string falls below into a small body.",
+        tip:
+          "If the eyes look pinched closed, gently push your middle fingers apart to widen them.",
+        strings: [
+          { points: [[200, 180], [240, 140], [280, 180], [240, 220], [200, 180]], curve: 0 },
+          { points: [[320, 180], [360, 140], [400, 180], [360, 220], [320, 180]], curve: 0 },
+          { points: ["L3", [300, 280], "R3"], curve: 0 },
+        ],
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "two-hogans",
+    title: "Two Hogans",
+    category: "World Traditions",
+    difficulty: 2,
+    minutes: 4,
+    blurb:
+      "A Navajo figure showing two hogans (round dwellings with low domed roofs) standing side by side.",
+    steps: [
+      {
+        title: "Begin with Opening A",
+        body:
+          "Make Opening A on your hands.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+        ],
+      },
+      {
+        title: "Pass the index loops over your thumbs",
+        body:
+          "Lift each index loop up, over your thumb, and let it drop. Each thumb now holds two loops; each index is empty.",
+        strings: [
+          { from: "L1", to: "R1", curve: -10, new: true },
+          { from: "L1", to: "R1", curve: -25 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+        ],
+      },
+      {
+        title: "Navaho the thumbs",
+        body:
+          "On each hand, lift the lower thumb loop over the upper one and off. Only one loop remains on each thumb.",
+        strings: [
+          { from: "L1", to: "R1", curve: -10 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+        ],
+      },
+      {
+        title: "Hook the centre with the index fingers",
+        body:
+          "Reach each index finger from above into its own centre triangle and hook the bottom string. Lift to set the figure.",
+        tip:
+          "If the roofs look squashed, raise your indexes a little — the rooflines should arc gently upward.",
+        strings: [
+          { from: "L1", to: "R1", curve: 0 },
+          { from: "L5", to: "R5", curve: 60 },
+          { points: ["L1", [220, 160], "L2"], curve: 0 },
+          { points: ["R1", [380, 160], "R2"], curve: 0 },
+          { points: ["L2", [260, 200], "L1"], curve: 0 },
+          { points: ["R2", [340, 200], "R1"], curve: 0 },
+          { from: "L2", to: "R2", curve: 0 },
+        ],
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "two-coyotes",
+    title: "Two Coyotes",
+    category: "World Traditions",
+    difficulty: 3,
+    minutes: 5,
+    blurb:
+      "A Navajo figure with two coyote silhouettes facing each other across the centre — pointed snouts, upright ears.",
+    steps: [
+      {
+        title: "Begin with Opening A",
+        body:
+          "Make Opening A on your hands.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+        ],
+      },
+      {
+        title: "Thumbs over and pick up the far middle string",
+        body:
+          "Bring each thumb over the near index, over both middle strings, and hook the far middle string from below. Pull it back on the thumb.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+          { from: "L1", to: "R1", curve: -25, new: true },
+        ],
+      },
+      {
+        title: "Indexes pick up the near thumb string from below",
+        body:
+          "Bend each index forward, slip it under the near thumb string, and lift. Each index now carries an extra loop.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+          { from: "L1", to: "R1", curve: -25 },
+          { points: ["L1", "L2"], curve: 0, new: true },
+          { points: ["R1", "R2"], curve: 0, new: true },
+        ],
+      },
+      {
+        title: "Drop the middle fingers and turn out",
+        body:
+          "Release both middle fingers and rotate your palms forward. Two pointed coyote heads appear at the centre, snouts touching.",
+        tip:
+          "Tilt your hands slightly downward to make the ears stand up.",
+        strings: [
+          { from: "L5", to: "R5", curve: 60 },
+          // left coyote
+          { points: [[180, 160], [240, 180], [240, 220], [180, 240], [200, 200], [180, 160]], curve: 0 },
+          { points: [[200, 160], [220, 130], [220, 170]], curve: 0 },
+          // right coyote
+          { points: [[420, 160], [360, 180], [360, 220], [420, 240], [400, 200], [420, 160]], curve: 0 },
+          { points: [[400, 160], [380, 130], [380, 170]], curve: 0 },
+        ],
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "caroline-catch",
+    title: "Caroline Catch",
+    category: "World Traditions",
+    difficulty: 3,
+    minutes: 4,
+    blurb:
+      "A Caroline Islands figure that builds a tight diamond lattice, then collapses with a snap when you release — leaving a single clean loop.",
+    steps: [
+      {
+        title: "Position One",
+        body:
+          "Loop the string behind the four fingers of each hand.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60, new: true },
+          { from: "L5", to: "R5", curve: 60, new: true },
+        ],
+      },
+      {
+        title: "Right index picks up left palm string",
+        body:
+          "Reach your right index finger across, slide it under the string crossing your left palm, and pull it back.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { points: ["Lpalm", "R2"], curve: 10, new: true },
+        ],
+      },
+      {
+        title: "Left index does the same in reverse",
+        body:
+          "Reach your left index finger through the right index loop and pick up the right palm string. Pull it back.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { points: ["Lpalm", "R2"], curve: 10 },
+          { points: ["Rpalm", "L2"], curve: 10, new: true },
+        ],
+      },
+      {
+        title: "Twist a half-turn outward",
+        body:
+          "Roll each index away from you a half-turn so the two centre strings cross. The figure now has a tight diamond at the centre.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { points: [[260, 200], [300, 160], [340, 200], [300, 240], [260, 200]], curve: 0, new: true },
+        ],
+      },
+      {
+        title: "Drop the pinkies to catch",
+        body:
+          "Release both pinkies at once and pull your hands smoothly apart. The lattice collapses into a single closed loop suspended between your indexes — the catch.",
+        tip:
+          "If you point at a friend's wrist as you pull, the loop appears to leap onto them. Practise the pull first; it has to be one fluid motion.",
+        strings: [
+          { from: "L2", to: "R2", curve: 0 },
+          { from: "L2", to: "R2", curve: 5, new: true },
+          { from: "L5", to: "R5", curve: 60, loose: true },
+        ],
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "crows-feet",
+    title: "Crow's Feet",
+    category: "Classic Figures",
+    difficulty: 2,
+    minutes: 3,
+    blurb:
+      "A pair of three-toed crow tracks pressed into the centre of the figure. Sometimes called Bird Tracks.",
+    steps: [
+      {
+        title: "Begin with Opening A",
+        body:
+          "Make Opening A on your hands.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+        ],
+      },
+      {
+        title: "Thumbs hook the far index string",
+        body:
+          "Bring each thumb under the far index string and pull it back. Each thumb now carries an extra loop.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+          { from: "L1", to: "R1", curve: -30, new: true },
+        ],
+      },
+      {
+        title: "Pinkies hook the near middle string",
+        body:
+          "Bend each pinky over and hook the near middle string from below, pulling it back to the pinky.",
+        strings: [
+          { from: "L2", to: "R2", curve: -60 },
+          { from: "L5", to: "R5", curve: 60 },
+          { from: "L3", to: "R3", curve: -10 },
+          { from: "L3", to: "R3", curve: 10 },
+          { from: "L1", to: "R1", curve: -30 },
+          { from: "L5", to: "R5", curve: 25, new: true },
+        ],
+      },
+      {
+        title: "Drop the middles and stretch",
+        body:
+          "Release both middle fingers. Two three-pronged shapes — the crow's feet — settle in the centre.",
+        tip:
+          "If the toes are uneven, gently tug your indexes outward; that aligns the splay.",
+        strings: [
+          { from: "L1", to: "R1", curve: -30 },
+          { from: "L5", to: "R5", curve: 60 },
+          // left foot
+          { points: [[230, 200], [200, 160]], curve: 0 },
+          { points: [[230, 200], [240, 160]], curve: 0 },
+          { points: [[230, 200], [220, 240]], curve: 0 },
+          // right foot
+          { points: [[370, 200], [400, 160]], curve: 0 },
+          { points: [[370, 200], [360, 160]], curve: 0 },
+          { points: [[370, 200], [380, 240]], curve: 0 },
+        ],
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "mosquito",
+    title: "Mosquito",
+    category: "Tricks & Magic",
+    difficulty: 1,
+    minutes: 2,
+    blurb:
+      "A short trick: a 'mosquito' lands on a friend's finger and 'stings' them when you slap the string. The sting is just a snap of slack — it doesn't hurt.",
+    steps: [
+      {
+        title: "Set up the loop",
+        body:
+          "Hold the loop between both hands, palms facing each other, the two strands hanging vertically.",
+        strings: [
+          { from: "L1", to: "R1", curve: 60, new: true },
+          { from: "L1", to: "R1", curve: -60, new: true },
+        ],
+      },
+      {
+        title: "Twist the strands together",
+        body:
+          "Rotate one hand so the two strands twist around each other six or eight times. Keep the loop tense.",
+        strings: [
+          { points: ["L1", [240, 170], [300, 230], [360, 170], "R1"], curve: 0 },
+          { points: ["L1", [240, 230], [300, 170], [360, 230], "R1"], curve: 0 },
+        ],
+      },
+      {
+        title: "Ask for a finger",
+        body:
+          "Have your friend stick out an index finger. Pinch the twisted middle of the loop with your free fingers and lay it across their finger.",
+        strings: [
+          { points: ["L1", [240, 170], [300, 230], [360, 170], "R1"], curve: 0 },
+          { points: ["L1", [240, 230], [300, 170], [360, 230], "R1"], curve: 0 },
+          { points: [[280, 200], [320, 200]], curve: 0, new: true },
+        ],
+      },
+      {
+        title: "Slap and snap apart",
+        body:
+          "Pretend to slap a mosquito on the back of their finger, then sharply pull your hands apart. The twists unwind with a buzzing snap that feels like a sting.",
+        tip:
+          "Pull along the line of the string — never up or down. The snap should land cleanly past their finger, not into it.",
+        strings: [
+          { from: "L1", to: "R1", curve: 0 },
+          { from: "L1", to: "R1", curve: -10 },
+        ],
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------------
+  {
+    id: "threading-closed-loop",
+    title: "Threading a Closed Loop",
+    category: "Tricks & Magic",
+    difficulty: 2,
+    minutes: 3,
+    blurb:
+      "A small magic figure: the loop appears to pass straight through your finger without ever opening. Best done up close.",
+    steps: [
+      {
+        title: "Hang the loop on your left index",
+        body:
+          "Drape the loop over your left index finger so it hangs in two equal strands.",
+        strings: [
+          { from: "L2", to: "L1", curve: 30, new: true },
+          { from: "L2", to: "L1", curve: -30, new: true },
+        ],
+      },
+      {
+        title: "Twist the lower bend with your right thumb and index",
+        body:
+          "Pinch the bottom of the loop and give it one twist toward yourself — creating a small crossing in the middle of the hanging string.",
+        strings: [
+          { from: "L2", to: "L1", curve: 30 },
+          { from: "L2", to: "L1", curve: -30 },
+          { points: [[160, 280], [190, 260], [160, 240]], curve: 0, new: true },
+        ],
+      },
+      {
+        title: "Hook the twist over your left index",
+        body:
+          "Lift the small twisted loop and place it over the tip of your left index finger, on top of the existing loop.",
+        strings: [
+          { from: "L2", to: "L1", curve: 30 },
+          { from: "L2", to: "L1", curve: -30 },
+          { points: ["L2", [180, 150], "L2"], curve: 0, new: true },
+        ],
+      },
+      {
+        title: "Pull down sharply",
+        body:
+          "Grab both lower strands with your right hand and tug them straight down. The hidden twist unwinds; the loop seems to fall right through your left index finger.",
+        tip:
+          "The misdirection is everything — keep eye contact with your audience as you pull. They will look at your face, not your finger.",
+        strings: [
+          { from: "L2", to: "L1", curve: 30 },
+          { from: "L2", to: "L1", curve: -30 },
+          { points: [[140, 300], [180, 320], [220, 300]], curve: 0 },
+        ],
+      },
+    ],
+  },
 ];
 
 /* Helpers used by some of the diagrams above. */
