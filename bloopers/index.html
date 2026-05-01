@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bloopers — Matilda's String Games</title>
+    <meta
+      name="description"
+      content="What an AI thought string figures look like. Pretty drawings, but not real string figures. For the actual lessons, go back to the main app."
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .gallery-intro {
+        max-width: 720px;
+        margin: 0 auto 32px;
+      }
+      .gallery-intro h1 {
+        font-family: var(--serif);
+        font-size: 38px;
+        line-height: 1.1;
+        margin: 0 0 12px;
+      }
+      .gallery-intro p {
+        color: var(--ink-soft);
+        margin: 0 0 8px;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 22px;
+      }
+      .blooper {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+      }
+      .blooper img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        background: #faf3e6;
+        display: block;
+      }
+      .blooper-body {
+        padding: 14px 16px 16px;
+      }
+      .blooper-title {
+        font-family: var(--serif);
+        font-size: 18px;
+        margin: 0 0 4px;
+      }
+      .blooper-caption {
+        color: var(--ink-soft);
+        font-size: 14px;
+        margin: 0;
+      }
+      .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: var(--accent);
+        text-decoration: none;
+        font-family: var(--mono);
+        font-size: 13px;
+      }
+      .back-link:hover {
+        color: var(--ink);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="../" class="brand" style="text-decoration: none;">
+        <span class="brand-mark" aria-hidden="true">&#x29C9;</span>
+        Matilda's String Games
+      </a>
+      <nav class="topbar-meta">
+        <span class="crumb">Bloopers</span>
+      </nav>
+    </header>
+
+    <main>
+      <section class="gallery-intro">
+        <h1>The bloopers reel</h1>
+        <p>
+          We tried to get an AI to draw plates for the seven figures that
+          aren't in any pre-1930 public-domain book. These are what came
+          back. They are pretty. They are also not how the figures actually
+          look.
+        </p>
+        <p>
+          Kept here for posterity, because the AI was trying its best and
+          some of them are charming. For the real lessons, head back to the
+          <a href="../">main app</a>.
+        </p>
+      </section>
+
+      <section class="gallery">
+        <article class="blooper">
+          <img src="cup-and-saucer.png" alt="AI rendering of Cup and Saucer" loading="lazy" />
+          <div class="blooper-body">
+            <h2 class="blooper-title">Cup and Saucer</h2>
+            <p class="blooper-caption">A real teacup on a real saucer. The AI did not get the memo about it being made of string.</p>
+          </div>
+        </article>
+
+        <article class="blooper">
+          <img src="eiffel-tower.png" alt="AI rendering of Eiffel Tower" loading="lazy" />
+          <div class="blooper-body">
+            <h2 class="blooper-title">Eiffel Tower</h2>
+            <p class="blooper-caption">Closest to right. There is at least string forming a triangle.</p>
+          </div>
+        </article>
+
+        <article class="blooper">
+          <img src="witchs-broom.png" alt="AI rendering of Witch's Broom" loading="lazy" />
+          <div class="blooper-body">
+            <h2 class="blooper-title">Witch's Broom</h2>
+            <p class="blooper-caption">A real broom, not a string-figure broom. Hands gesturing nearby for moral support.</p>
+          </div>
+        </article>
+
+        <article class="blooper">
+          <img src="cats-whiskers.png" alt="AI rendering of Cat's Whiskers" loading="lazy" />
+          <div class="blooper-body">
+            <h2 class="blooper-title">Cat's Whiskers</h2>
+            <p class="blooper-caption">Genuine starburst. Probably the prettiest of the bunch.</p>
+          </div>
+        </article>
+
+        <article class="blooper">
+          <img src="mosquito.png" alt="AI rendering of Mosquito" loading="lazy" />
+          <div class="blooper-body">
+            <h2 class="blooper-title">Mosquito</h2>
+            <p class="blooper-caption">The AI drew a real mosquito between the palms. Anatomically accurate. Wrong subject.</p>
+          </div>
+        </article>
+
+        <article class="blooper">
+          <img src="cutting-off-head.png" alt="AI rendering of Cutting Off the Head" loading="lazy" />
+          <div class="blooper-body">
+            <h2 class="blooper-title">Cutting Off the Head</h2>
+            <p class="blooper-caption">Mercifully abstract. The safety filter hovered nearby.</p>
+          </div>
+        </article>
+
+        <article class="blooper">
+          <img src="caroline-catch.png" alt="AI rendering of Caroline Catch" loading="lazy" />
+          <div class="blooper-body">
+            <h2 class="blooper-title">Caroline Catch</h2>
+            <p class="blooper-caption">Two hands, one loop, vague vibes. Approximately the right idea.</p>
+          </div>
+        </article>
+      </section>
+
+      <a class="back-link" href="../">← back to the real lessons</a>
+    </main>
+
+    <footer class="foot">
+      <p>
+        Generated with Flux Schnell via fal.ai. Total compute cost: about
+        eight cents. Total accuracy: not great.
+      </p>
+    </footer>
+  </body>
+</html>
