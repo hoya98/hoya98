@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
 """
-Hexagon Fidget CLIP Bookmark generator (print-in-place).
+Hexagon Telescoping-Fidget Bookmark generator (print-in-place).
 
-A classic clip-on bookmark:
-  - a long slim blade that goes down between the pages,
-  - a sleeve / slot clip near the top that grips the page edge,
-  - a decorative head carrying ONE print-in-place hexagon spinner that
-    stands proud of the face (spins on an axis perpendicular to the blade
-    -- "facing out"), held captive by a mushroom cap.
+BODY: a standard flat decorative clip bookmark, 1 mm thick, single plane.
+  It clips onto a page by having an OUTER OUTLINE (frame) and an INNER
+  TONGUE joined at the top, separated by side slots -- you thread the page
+  between the frame and the tongue.
 
-Prints as ONE piece, flat on the bed, no supports, no assembly. The spin
-axis is vertical (Z) so the spinner is a clean print-in-place. The clip's
-upper plate bridges the slot (short span, good cooling handles it on a P1S).
+TOP: a print-in-place TELESCOPING hexagon fidget. A hex knob on a captive
+  plunger that pulls UP and pushes DOWN (expands/retracts along its axis)
+  and SPINS freely, trapped inside a fixed hex sleeve by a neck so it can
+  never pull off.
 
-Output: hexagon_clip_bookmark.stl  (+ a no-fidget flat clip variant)
+Prints as ONE piece, flat on the bed, no supports, no assembly. The slide/
+spin axis is vertical (Z) -> clean print-in-place; the only bridges are the
+sleeve's conical neck (self-supporting) and the plunger flange (0.4 mm gap).
+
+Output: hexagon_telescope_bookmark.stl  (+ a no-fidget flat variant)
 Units: millimetres. Tune the PARAMETERS block and re-run.
 """
 
@@ -25,67 +28,49 @@ from manifold3d import Manifold, CrossSection, JoinType
 # --------------------------------------------------------------------------
 # PARAMETERS (mm)
 # --------------------------------------------------------------------------
-CLR        = 0.40    # print-in-place clearance (0.40 = guaranteed free on a P1S)
+CLR        = 0.40    # print-in-place clearance (slide + spin fit)
+BASE_T     = 1.0     # flat bookmark thickness (standard decorative bookmark)
 
-# --- bookmark body / blade ---
-BASE_T     = 1.6     # blade + lower-clip + head plate thickness (slim, some spring)
-TIP_W      = 7.0     # width at the bottom tip
-BLADE_W    = 14.0    # width where the blade meets the clip
-BLADE_LEN  = 70.0    # how far the blade reaches down into the book
+# --- flat clip body (outline + inner tongue) ---
+W          = 24.0    # bookmark width
+SLOT_BOT   = 9.0     # slots start this far up (leaves a closed bottom of the frame)
+SLOT_TOP   = 80.0    # slots end this far up (closed frame all around the tongue)
+HEAD_H     = 24.0    # solid head area at the top (holds the fidget)
+TONGUE_W   = 12.0    # width of the inner tongue
+SLOT       = 1.8     # side-slot width (the gap the page threads through)
+CORNER     = 8.0     # outer corner rounding
 
-# --- the page-gripping slot clip ---
-CLIP_W     = 16.0    # clip width
-CLIP_LEN   = 11.0    # length of the gripping slot (short = bridges cleanly)
-SLOT       = 1.0     # slot gap the page edge slides into
-CLIP_T     = 1.0     # thickness of the outer clip plate
-FOLD       = 1.6     # length of the solid fold joining the two plates
-
-# --- decorative head ---
-HEAD_W     = 26.0
-HEAD_L     = 24.0
-CORNER_R   = 4.0
-
-# --- the hexagon spinner (sits ON TOP of the head face, spins on Z) ---
-DISC_R     = 10.0    # hex circumradius
-DISC_T     = 3.0
-POST_R     = 2.0
-COLLAR_R   = 3.0
-COLLAR_H   = 0.6
-CAP_R      = 3.4
-CAP_T      = 0.8
-
-TASSEL_R   = 0.0     # set >0 to add a tassel hole in the head (e.g. 2.5)
+# --- telescoping hexagon fidget (axis = Z) ---
+SLEEVE_HEX = 8.0     # sleeve / knob hexagon circumradius
+SLEEVE_H   = 9.0     # height of the fixed sleeve (≈ telescoping travel)
+NECK_H     = 2.0     # conical neck at sleeve top (self-supporting overhang)
+R_STEM     = 2.2     # plunger stem radius
+FLANGE_R   = 4.0     # plunger bottom flange (what the neck traps)
+FLANGE_H   = 1.5
+KNOB_H     = 3.0     # the hex you grab and spin
 SEGMENTS   = 96
 
 # --- derived ---
-HOLE_R     = POST_R + CLR
-# layout along +Y; blade tip at Y=0, head at the top
-CLIP_Y0    = BLADE_LEN - 2.0                 # slot mouth (page enters here)
-CLIP_Y1    = CLIP_Y0 + CLIP_LEN              # fold end of the slot
-# head sits above the clip so the spinning disc fully clears the clip plate
-HEAD_CY    = CLIP_Y1 + FOLD + 2.0 + DISC_R   # head centre
-SPIN_C     = (0.0, HEAD_CY)                  # spinner centre
+R_NECK   = R_STEM + CLR          # neck hole (stem slides/spins through it)
+R_BORE   = FLANGE_R + CLR        # sleeve bore (flange slides/spins inside)
+L        = SLOT_TOP + HEAD_H     # total length
+SPIN_C   = (0.0, SLOT_TOP + HEAD_H / 2)   # fidget centre on the head
 
-# spinner vertical stack (on top of the head plate)
-COLLAR_TOP = BASE_T + COLLAR_H
-DISC_BOT   = COLLAR_TOP + CLR
-DISC_TOP   = DISC_BOT + DISC_T
-CAP_BOT    = DISC_TOP + CLR
-CAP_TOP    = CAP_BOT + CAP_T
+# vertical stack (head top = z = BASE_T)
+SLEEVE_WALL_TOP = BASE_T + SLEEVE_H
+NECK_TOP        = SLEEVE_WALL_TOP + NECK_H
+FLANGE_BOT      = BASE_T + CLR
+FLANGE_TOP      = FLANGE_BOT + FLANGE_H
+KNOB_BOT        = NECK_TOP + CLR
+KNOB_TOP        = KNOB_BOT + KNOB_H
 
-# clip vertical stack
-SLOT_BOT   = BASE_T
-UPPER_BOT  = BASE_T + SLOT
-UPPER_TOP  = UPPER_BOT + CLIP_T
-
-TOTAL_LEN  = HEAD_CY + HEAD_L / 2
-
-print(f"Clip bookmark: ~{HEAD_W:.0f} mm wide head, {TOTAL_LEN:.0f} mm long, "
-      f"blade {BLADE_LEN:.0f} mm, slot {SLOT} mm, spinner cap height {CAP_TOP:.1f} mm")
+print(f"Flat clip bookmark {W:.0f} x {L:.0f} x {BASE_T} mm; "
+      f"telescoping hex fidget, collapsed height {KNOB_TOP:.1f} mm, "
+      f"~{SLEEVE_WALL_TOP - FLANGE_TOP:.0f} mm of travel, clearance {CLR} mm")
 
 
 # --------------------------------------------------------------------------
-# 2D / 3D helpers
+# helpers
 # --------------------------------------------------------------------------
 def hexagon(circum_r):
     pts = [(circum_r * math.cos(math.radians(90 + 60 * i)),
@@ -98,61 +83,56 @@ def rrect(w, l, cx, cy, r):
     return s.offset(r, JoinType.Round, circular_segments=SEGMENTS).translate([cx, cy])
 
 
-def poly(pts):
-    return CrossSection([pts])
+def rect(w, h, cx, cy):
+    return CrossSection.square([w, h], center=True).translate([cx, cy])
 
 
-def cyl(r, h, z0):
-    return Manifold.cylinder(h, r, r, SEGMENTS).translate([0, 0, z0])
-
-
-def box(w, l, h, cx, cy, z0):
-    return Manifold.cube([w, l, h], center=False).translate([cx - w / 2, cy - l / 2, z0])
+def cyl(r0, h, z0, r1=None):
+    r1 = r0 if r1 is None else r1
+    return Manifold.cylinder(h, r0, r1, SEGMENTS).translate([0, 0, z0])
 
 
 # --------------------------------------------------------------------------
-# 2D outline of the flat body (blade + clip pad + head)
+# flat body: outer outline + inner tongue (joined at the top), side slots
 # --------------------------------------------------------------------------
 def body_outline():
-    blade = poly([(-TIP_W / 2, 0.0), (TIP_W / 2, 0.0),
-                  (BLADE_W / 2, BLADE_LEN), (-BLADE_W / 2, BLADE_LEN)])
-    clip_pad = rrect(CLIP_W, CLIP_LEN + FOLD + 6, 0, (CLIP_Y0 + CLIP_Y1) / 2 + 1, 3)
-    head = rrect(HEAD_W, HEAD_L, *SPIN_C, CORNER_R)
-    outline = blade + clip_pad + head
-    # smooth the seams / round the tip
-    outline = outline.offset(1.2, JoinType.Round, circular_segments=SEGMENTS) \
-                     .offset(-1.2, JoinType.Round, circular_segments=SEGMENTS)
-    return outline
+    plate = rrect(W, L, 0, L / 2, CORNER)
+    # two side slots between SLOT_BOT and SLOT_TOP -> closed outer frame
+    # (outline) with an inner tongue joined to it at both ends; thread the
+    # page through the slots to clip onto a page.
+    xo = TONGUE_W / 2 + SLOT / 2
+    h  = SLOT_TOP - SLOT_BOT
+    cy = (SLOT_TOP + SLOT_BOT) / 2
+    left  = rrect(SLOT, h, -xo, cy, SLOT / 2)
+    right = rrect(SLOT,  h,  xo, cy, SLOT / 2)
+    return plate - (left + right)
 
 
 # --------------------------------------------------------------------------
-# fixed body: base plate + clip upper plate + fold + spinner post/collar/cap
+# FIXED parts: body + sleeve (walls + conical neck)
 # --------------------------------------------------------------------------
 def build_fixed():
-    base = body_outline().extrude(BASE_T)
+    body = body_outline().extrude(BASE_T)
 
-    # outer clip plate (bridges the slot) + the fold that joins it to the base
-    cx, cymid = 0.0, (CLIP_Y0 + CLIP_Y1) / 2
-    upper = box(CLIP_W - 2.0, CLIP_LEN + FOLD, CLIP_T, cx, cymid + FOLD / 2, UPPER_BOT)
-    fold  = box(CLIP_W - 2.0, FOLD, UPPER_TOP - BASE_T, cx, CLIP_Y1 + FOLD / 2, BASE_T)
-    body  = base + upper + fold
+    sleeve_wall = (hexagon(SLEEVE_HEX).extrude(SLEEVE_H).translate([0, 0, BASE_T])
+                   - cyl(R_BORE, SLEEVE_H + 2, BASE_T - 1))
+    # neck: hex cap whose bore is a cone (wide at the bottom, narrow at the top)
+    # so the inward overhang that traps the plunger is self-supporting.
+    neck = hexagon(SLEEVE_HEX).extrude(NECK_H).translate([0, 0, SLEEVE_WALL_TOP])
+    neck -= cyl(R_BORE, NECK_H + 1, SLEEVE_WALL_TOP - 0.5, r1=R_NECK)
 
-    # spinner mechanism (fixed parts), centred on the head
-    post   = cyl(POST_R,   CAP_BOT,  0.0)
-    collar = cyl(COLLAR_R, COLLAR_H, BASE_T)
-    cap    = cyl(CAP_R,    CAP_T,    CAP_BOT)
-    body  += (post + collar + cap).translate([SPIN_C[0], SPIN_C[1], 0])
-
-    if TASSEL_R > 0:
-        body -= cyl(TASSEL_R, BASE_T + 2, -1).translate(
-            [0, HEAD_CY + HEAD_L / 2 - TASSEL_R - 2.0, 0])
+    body += (sleeve_wall + neck).translate([SPIN_C[0], SPIN_C[1], 0])
     return body
 
 
-def build_spinner():
-    disc = hexagon(DISC_R).extrude(DISC_T).translate([0, 0, DISC_BOT])
-    disc -= cyl(HOLE_R, DISC_T + 2, DISC_BOT - 1)
-    return disc.translate([SPIN_C[0], SPIN_C[1], 0])
+# --------------------------------------------------------------------------
+# MOVING part: plunger = bottom flange + stem + hex knob
+# --------------------------------------------------------------------------
+def build_plunger():
+    flange = cyl(FLANGE_R, FLANGE_H, FLANGE_BOT)
+    stem   = cyl(R_STEM, KNOB_BOT - FLANGE_TOP, FLANGE_TOP)
+    knob   = hexagon(SLEEVE_HEX).extrude(KNOB_H).translate([0, 0, KNOB_BOT])
+    return (flange + stem + knob).translate([SPIN_C[0], SPIN_C[1], 0])
 
 
 def to_trimesh(man):
@@ -163,22 +143,19 @@ def to_trimesh(man):
 
 
 def main():
-    fixed = build_fixed()
-    spin  = build_spinner()
-    inter = (fixed ^ spin).volume()
-    print(f"frame/spinner intersection: {inter:.4f} mm^3 (must be ~0 -> spins free)")
+    fixed   = build_fixed()
+    plunger = build_plunger()
+    inter = (fixed ^ plunger).volume()
+    print(f"fixed/plunger intersection: {inter:.4f} mm^3 (must be ~0 -> free to move)")
 
-    mesh = to_trimesh(fixed + spin)
-    mesh.export("hexagon_clip_bookmark.stl")
-    print(f"wrote hexagon_clip_bookmark.stl ({len(mesh.faces)} faces, "
+    mesh = to_trimesh(fixed + plunger)
+    mesh.export("hexagon_telescope_bookmark.stl")
+    print(f"wrote hexagon_telescope_bookmark.stl ({len(mesh.faces)} faces, "
           f"watertight={mesh.is_watertight})")
 
-    # no-fidget variant: same clip + a flat engraved hexagon (bulletproof print)
+    # no-fidget variant: same flat clip body + a flat engraved hexagon
     flat = body_outline().extrude(BASE_T)
-    flat += box(CLIP_W - 2.0, CLIP_LEN + FOLD, CLIP_T, 0,
-                (CLIP_Y0 + CLIP_Y1) / 2 + FOLD / 2, UPPER_BOT)
-    flat += box(CLIP_W - 2.0, FOLD, UPPER_TOP - BASE_T, 0, CLIP_Y1 + FOLD / 2, BASE_T)
-    ring = (hexagon(DISC_R) - hexagon(DISC_R - 1.4)).extrude(0.6) \
+    ring = (hexagon(SLEEVE_HEX) - hexagon(SLEEVE_HEX - 1.4)).extrude(0.6) \
         .translate([SPIN_C[0], SPIN_C[1], BASE_T - 0.6])
     flat -= ring
     fm = to_trimesh(flat)

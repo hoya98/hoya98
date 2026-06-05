@@ -1,62 +1,74 @@
-# Hexagon Fidget Clip Bookmark — for Bambu Lab P1S
+# Hexagon Telescoping-Fidget Bookmark — for Bambu Lab P1S
 
-A **classic clip-on bookmark** with a fidget:
+A standard-style **flat clip bookmark** with a **telescoping hexagon fidget** on top.
 
-- a slim tapered **blade** that slides down between the pages,
-- a **sleeve / slot clip** near the top that grips the page edge,
-- a decorative **head** carrying one **print-in-place hexagon spinner** that
-  stands proud of the face and spins on an axis perpendicular to the blade
-  ("facing out"), held captive by a mushroom cap.
+- **Body:** a flat **1 mm** decorative bookmark — an **outer outline (frame)**
+  with an **inner tongue**, separated by two side slots. Thread a page through
+  the slots to clip it on. Single plane, prints flat, no supports.
+- **Top fidget:** a print-in-place **telescoping hexagon** — a hex knob on a
+  captive plunger you pull **up** and push **down** (expands/retracts along its
+  axis) and that **spins freely**. A conical neck traps the plunger's flange so
+  it can never pull off. ~7 mm of travel.
 
-Prints as **one piece, flat on the bed, no supports, no assembly.** The spin
-axis is vertical, so the spinner is a clean print-in-place; the clip's outer
-plate bridges a short slot.
+Prints as **one piece, flat on the bed, no supports, no assembly.** The slide/
+spin axis is vertical, so it's a clean print-in-place.
 
 ![preview](preview.png)
 
-- **Size:** ~26 mm wide head, ~105 mm long, blade 70 mm. Blade ~1.6 mm thin.
-- **Slot:** 1.0 mm (grips a cover/page edge). **Clearance:** 0.40 mm (free spin).
-- **Material:** PLA. Spinner cap stands ~6.8 mm proud of the head.
+- **Size:** 24 × 104 mm, body 1 mm thick. Fidget ~15 mm tall collapsed, ~22 mm extended.
+- **Clearance:** 0.40 mm (free slide + spin). **Slots:** 1.8 mm.
+- **Material:** PLA.
 
 ## Files
 
 | File | What it is |
 |------|------------|
-| `hexagon_clip_bookmark.stl` | The clip bookmark with the print-in-place hex spinner. |
-| `flat_clip_bookmark.stl` | Same clip, but with a flat engraved hexagon instead of a spinner (no moving parts — the safe fallback). |
-| `generate_bookmark.py` | Parametric generator — change blade length, slot, clearance, spinner size, etc. and re-run. |
-| `preview.png` | 3-view render (note the side view: blade + raised slot clip + proud spinner). |
+| `hexagon_telescope_bookmark.stl` | The bookmark + print-in-place telescoping hexagon fidget. |
+| `flat_clip_bookmark.stl` | Same flat clip body with a flat engraved hexagon (no moving parts — safe fallback). |
+| `generate_bookmark.py` | Parametric generator — change body size, slots, clearance, fidget travel, etc. |
+| `preview.png` | Top + isometric render. |
+
+## How the fidget is captured (so it can't fall apart)
+
+```
+        [ hex knob ]      <- grab + spin + pull up
+            | |  stem
+        ===/   \===  conical neck  (narrow hole, self-supporting overhang)
+        |  flange  |  <- wider than the neck hole -> trapped
+        |  (slides)|
+        |  sleeve  |  (fixed to the bookmark)
+   _____|__________|_____  1 mm flat body
+```
+
+Pull the knob: the plunger rises until its flange catches under the neck.
+Push it: the flange settles back to the body. Round stem in a round hole = it
+also spins. All gaps are 0.40 mm so the slicer prints it free.
 
 ## Print settings (Bambu Studio / Orca, P1S, 0.4 mm nozzle)
 
-**Orientation:** lay it **flat on the plate exactly as the STL loads** — blade
-face down, spinner pointing up (+Z). Do **not** rotate it; that keeps the
-spinner a clean print-in-place and the clip slot a short bridge. **No supports.**
+**Orientation:** load the STL **as-is, flat on the plate** (body down, fidget up).
+Do **not** rotate. **No supports.**
 
-1. **Layer height:** 0.20 mm (0.16 mm = smoother spin).
-2. **Walls:** 2–3. **Top/bottom layers:** 4. **Infill:** 15 % gyroid.
-3. **Seam → `Aligned`**, and **paint the seam onto the head/body, never onto the
-   spinner disc.** A fat seam on the disc is the #1 reason a print-in-place
-   fidget won't spin.
-4. **Bridging:** the clip's outer plate bridges the ~11 mm slot. Keep part
-   cooling high (PLA: fan ~100 % over bridges — the P1S handles this span well).
-   If the underside looks rough, that's fine — it's the inside of the clip.
-5. **First layer:** keep it clean, not over-squished. A fat first layer can
-   close the bottom of the spinner gap and fuse it — if your first layer is
-   squishy, nudge Z-offset up a hair or drop flow ~2 %.
-6. **Brim:** usually not needed. Add a 3 mm brim only if the thin blade tip lifts.
+1. **Layer height:** 0.20 mm (0.16 mm = silkier spin/slide).
+2. **Walls:** 2–3. **Top/bottom:** 4. **Infill:** 15 %.
+3. **Seam → `Aligned`**, and **paint the seam onto the sleeve, not the moving
+   knob/stem** — a fat seam across the gap is the usual cause of a seized fidget.
+4. **First layer clean, not over-squished:** the plunger flange floats 0.4 mm
+   above the body; a fat first layer can fuse it. If your first layer is squishy,
+   nudge Z-offset up a hair or drop flow ~2 %.
+5. The sleeve's neck is a **self-supporting cone** — no supports needed.
+6. **Brim:** not needed (good flat footprint).
 
-**After printing:** twist the spinner firmly to crack any stringing — it frees
-up and spins. Flex the clip open once to make sure the slot didn't fuse.
+**After printing:** push the knob down and pull it up firmly once to crack any
+stringing — it then telescopes and spins freely.
 
 ### Tuning (edit the top of `generate_bookmark.py`, then re-run)
 
-- **Spinner stuck:** raise `CLR` to `0.45`–`0.50` (and fix the disc seam first).
-- **Spinner loose/wobbly:** lower `CLR` to `0.30`.
-- **Clip too loose / won't grip:** lower `SLOT` to `0.6`–`0.8`.
-- **Clip slot fused shut:** raise `SLOT` to `1.2` and/or shorten `CLIP_LEN`.
-- **Blade longer/shorter or wider:** `BLADE_LEN`, `BLADE_W`, `TIP_W`.
-- **Bigger/smaller fidget:** `DISC_R`, `DISC_T`. Add a tassel hole: set `TASSEL_R = 2.5`.
+- **Fidget stuck:** raise `CLR` to `0.45`–`0.50` (and fix the seam first).
+- **Fidget loose/rattly:** lower `CLR` to `0.30`.
+- **More travel / taller pop-up:** raise `SLEEVE_H`.
+- **Bigger/smaller hex:** `SLEEVE_HEX`. **Slots grip tighter:** lower `SLOT`.
+- **Longer/shorter bookmark:** `SLOT_TOP`, `SLOT_BOT`, `HEAD_H`, `W`, `TONGUE_W`.
 
 ## Regenerating
 
@@ -64,18 +76,3 @@ up and spins. Flex the clip open once to make sure the slot didn't fuse.
 pip install numpy manifold3d trimesh
 python3 generate_bookmark.py
 ```
-
-## Existing models to compare (you asked for "both")
-
-These aren't clip bookmarks, but they're proven print-in-place hex fidgets —
-handy if you want a reference spinner or just a quick separate fidget. Several
-ship ready-made P1S profiles:
-
-- [Hexagon Fidget — Print In Place (3D-Printing Nerds)](https://makerworld.com/en/models/1005807-hexagon-fidget-print-in-place)
-- [Hexagon Gyro Card Fidget — Print in Place](https://makerworld.com/en/models/1407430-hexagon-gyro-card-fidget-print-in-place)
-- [Hexagon Gyro — Fidget Spinner — Print In Place](https://makerworld.com/en/models/823168-hexagon-gyro-fidget-spinner-print-in-place)
-- [Print in Place Fidget Spinner (Printables)](https://www.printables.com/model/186682-print-in-place-fidget-spinner)
-
-> Community tip for any print-in-place spinner on Bambu machines: watch the
-> **seam** — a large seam can weld the spinner to the body and stop it spinning.
-> Paint the seam onto the body, not the moving disc.
