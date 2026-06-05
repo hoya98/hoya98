@@ -44,6 +44,19 @@ Pull the knob: the plunger rises until its flange catches under the neck.
 Push it: the flange settles back to the body. Round stem in a round hole = it
 also spins. All gaps are 0.40 mm so the slicer prints it free.
 
+## Test print first (recommended — a few minutes)
+
+Print-in-place success depends on your machine's calibration, so validate the
+fit before committing to the full bookmark:
+
+| File | Use |
+|------|-----|
+| `fidget_test_coupon.stl` | Just the fidget on a small base. Prints in a few minutes — twist/pull it to confirm it slides and spins free. |
+| `clearance_test_comb.stl` | Five fidgets at **0.30 / 0.35 / 0.40 / 0.45 / 0.50 mm** clearance, marked **1–5 dots** (1 dot = 0.30, 5 dots = 0.50). Print once, then pick the **loosest one that still feels captive and doesn't wobble**. |
+
+Then set `CLR` in `generate_bookmark.py` to the winning value and re-run to bake
+it into the bookmark. (Regenerate the tests with `python3 generate_tests.py`.)
+
 ## Print settings (Bambu Studio / Orca, P1S, 0.4 mm nozzle)
 
 **Orientation:** load the STL **as-is, flat on the plate** (body down, fidget up).
