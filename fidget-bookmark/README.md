@@ -1,91 +1,107 @@
-# Hexagon Telescoping-Fidget Bookmark — for Bambu Lab P1S
+# Hexagon Telescoping-Vortex Bookmark — for Bambu Lab P1S
 
-A standard-style **flat clip bookmark** with a **telescoping hexagon fidget** on top.
+A flat **clip bookmark** with a print-in-place **telescoping hexagon vortex** on top
+(rebuilt to match the reference photos — a nested-ring collapsing cone, not a single knob).
 
-- **Body:** a flat **1 mm** decorative bookmark — an **outer outline (frame)**
-  with an **inner tongue**, separated by two side slots. Thread a page through
-  the slots to clip it on. Single plane, prints flat, no supports.
-- **Top fidget:** a print-in-place **telescoping hexagon** — a hex knob on a
-  captive plunger you pull **up** and push **down** (expands/retracts along its
-  axis) and that **spins freely**. A conical neck traps the plunger's flange so
-  it can never pull off. ~7 mm of travel.
+- **Body:** a flat **1 mm** decorative bookmark — an **outer outline (frame)** with an
+  **inner tongue**, separated by two side slots. Thread a page through the slots to clip
+  it on. The top widens into a round **"lollipop" head** (~40 mm) that carries the fidget.
+- **Top fidget:** ~10 **concentric hexagonal rings** nested inside one another. It prints
+  **collapsed and flat** (~11 mm tall — looks like concentric spiral hexagons). **Pull the
+  centre** and it **telescopes up** into a **tapering, twisting cone** (~50 mm tall), then
+  pushes back down flat. Each ring is **captured** by the one outside it, so it can never
+  pull apart. A gentle per-ring twist makes the corners spiral — the **vortex** look.
 
-Prints as **one piece, flat on the bed, no supports, no assembly.** The slide/
-spin axis is vertical, so it's a clean print-in-place.
+Prints as **one piece, flat on the bed, no supports, no assembly.**
 
 ![preview](preview.png)
 
-- **Size:** 24 × 104 mm, body 1 mm thick. Fidget ~15 mm tall collapsed, ~22 mm extended.
-- **Clearance:** 0.40 mm (free slide + spin). **Slots:** 1.8 mm.
+X=0 cross-section — collapsed (as printed) vs extended (pulled up):
+
+![section](preview_section.png)
+
+- **Size:** 24 mm strap / **40 mm head** × ~104 mm, body 1 mm thick. Vortex ~11 mm collapsed, **~50 mm extended**.
+- **Clearance:** 0.30 mm flat (comb-tuned). **Capture lip:** 0.22 mm. **Slots:** 1.8 mm.
 - **Material:** PLA.
 
 ## Files
 
 | File | What it is |
 |------|------------|
-| `hexagon_telescope_bookmark.stl` | The bookmark + print-in-place telescoping hexagon fidget. |
-| `flat_clip_bookmark.stl` | Same flat clip body with a flat engraved hexagon (no moving parts — safe fallback). |
-| `generate_bookmark.py` | Parametric generator — change body size, slots, clearance, fidget travel, etc. |
-| `preview.png` | Top + isometric render. |
+| `hexagon_telescope_bookmark.stl` | The bookmark + print-in-place telescoping vortex. |
+| `flat_clip_bookmark.stl` | Same lollipop clip body with a flat engraved spiral hexagon (no moving parts — safe fallback). |
+| `fidget_test_coupon.stl` | One small vortex on a round base — quick mechanism test. |
+| `clearance_test_comb.stl` | Five small vortexes at **0.20 / 0.25 / 0.30 / 0.35 / 0.40 mm** clearance, marked **1–5 dots**. |
+| `generate_bookmark.py` | Parametric generator (source of truth). |
+| `generate_tests.py` | Test coupon + clearance comb (reuse the same `vortex_rings` builder). |
+| `render_preview.py` | matplotlib 3-view + X=0 cross-section renders. |
+| `preview.png`, `preview_section.png` | Renders. |
 
-## How the fidget is captured (so it can't fall apart)
+## How the vortex is captured (so it can't fall apart)
+
+Each ring is a thin hex tube with two interlocking chevrons:
 
 ```
-        [ hex knob ]      <- grab + spin + pull up
-            | |  stem
-        ===/   \===  conical neck  (narrow hole, self-supporting overhang)
-        |  flange  |  <- wider than the neck hole -> trapped
-        |  (slides)|
-        |  sleeve  |  (fixed to the bookmark)
-   _____|__________|_____  1 mm flat body
+   ring k-1 (outer) ───┐         ┌─── ring k (inner)
+        wall           │  \ /    │   inward NECK chevron (the stop) at the top
+                       │   ▲     │   pinches the bore to (ri - CATCH)
+            gap (CLR) →│  / \    │
+                       │   ▼     │   outward FOOT chevron (the catch) at the base
+        wall           │  / \    │   bulges the wall to (ro + CATCH)
 ```
 
-Pull the knob: the plunger rises until its flange catches under the neck.
-Push it: the flange settles back to the body. Round stem in a round hole = it
-also spins. All gaps are 0.40 mm so the slicer prints it free.
+Pull a ring up and its **foot** (wider than the next ring's **neck** hole by the 0.22 mm
+lip) wedges under that neck — a hard stop, so it can't escape. Because the catch radii sit
+at the **centre** of each chevron, the foot and neck actually meet when pulled (a simple
+base/top taper would slip past). All chevron faces are gentle ~30° overhangs → self-supporting.
+
+**The generator proves both properties every run:**
+- every adjacent ring pair has **~0 mm³** boolean intersection when collapsed (won't fuse in the print), and
+- each ring shows a **solid interference at peak engagement** (it's captured, can't pull off).
 
 ## Test print first (recommended — a few minutes)
 
-Print-in-place success depends on your machine's calibration, so validate the
-fit before committing to the full bookmark:
+Print-in-place success depends on your machine's calibration, so validate the fit first:
 
-| File | Use |
-|------|-----|
-| `fidget_test_coupon.stl` | Just the fidget on a small base. Prints in a few minutes — twist/pull it to confirm it slides and spins free. |
-| `clearance_test_comb.stl` | Five fidgets at **0.30 / 0.35 / 0.40 / 0.45 / 0.50 mm** clearance, marked **1–5 dots** (1 dot = 0.30, 5 dots = 0.50). Print once, then pick the **loosest one that still feels captive and doesn't wobble**. |
+1. Print **`clearance_test_comb.stl`** (five small vortexes, **0.20→0.40 mm**, marked 1→5 dots).
+2. Push each centre down, then pull it up. Pick the **loosest clearance that still pops up
+   captive and doesn't rattle sideways.** (More clearance = looser/easier; less = tighter/snappier.)
+3. Set `CLR` in `generate_bookmark.py` to that value, re-run, and print `hexagon_telescope_bookmark.stl`.
 
-Then set `CLR` in `generate_bookmark.py` to the winning value and re-run to bake
-it into the bookmark. (Regenerate the tests with `python3 generate_tests.py`.)
+> Note: clearance also sets the **ring count** — tighter clearance packs more rings (a busier
+> vortex), looser packs fewer. The default 0.30 mm gives ~10 rings.
 
 ## Print settings (Bambu Studio / Orca, P1S, 0.4 mm nozzle)
 
-**Orientation:** load the STL **as-is, flat on the plate** (body down, fidget up).
-Do **not** rotate. **No supports.**
+**Orientation:** load the STL **as-is, flat on the plate** (body down, vortex up). Do **not** rotate. **No supports.**
 
-1. **Layer height:** 0.20 mm (0.16 mm = silkier spin/slide).
+1. **Layer height:** 0.20 mm (0.16 mm = silkier telescope).
 2. **Walls:** 2–3. **Top/bottom:** 4. **Infill:** 15 %.
-3. **Seam → `Aligned`**, and **paint the seam onto the sleeve, not the moving
-   knob/stem** — a fat seam across the gap is the usual cause of a seized fidget.
-4. **First layer clean, not over-squished:** the plunger flange floats 0.4 mm
-   above the body; a fat first layer can fuse it. If your first layer is squishy,
-   nudge Z-offset up a hair or drop flow ~2 %.
-5. The sleeve's neck is a **self-supporting cone** — no supports needed.
-6. **Brim:** not needed (good flat footprint).
+3. **Seam → `Aligned`**, and **paint the seam onto the fixed base / outer ring, not the moving
+   rings** — a fat seam blob across a gap is the usual cause of a seized fidget.
+4. **First layer clean, not over-squished:** the moving rings float 0.3 mm above the base
+   floor; a fat first layer can fuse them. If your first layer is squishy, nudge Z-offset up a
+   hair or drop flow ~2 %.
+5. The chevrons are **self-supporting** (~30° faces) — no supports needed.
+6. **Brim:** not needed (good flat footprint), but a 3 mm brim helps if the head lifts.
 
-**After printing:** push the knob down and pull it up firmly once to crack any
-stringing — it then telescopes and spins freely.
+**After printing:** push the centre all the way down, then pull it up firmly once to crack
+any stringing between rings — it then telescopes freely.
 
 ### Tuning (edit the top of `generate_bookmark.py`, then re-run)
 
-- **Fidget stuck:** raise `CLR` to `0.45`–`0.50` (and fix the seam first).
-- **Fidget loose/rattly:** lower `CLR` to `0.30`.
-- **More travel / taller pop-up:** raise `SLEEVE_H`.
-- **Bigger/smaller hex:** `SLEEVE_HEX`. **Slots grip tighter:** lower `SLOT`.
-- **Longer/shorter bookmark:** `SLOT_TOP`, `SLOT_BOT`, `HEAD_H`, `W`, `TONGUE_W`.
+- **Rings stuck together:** raise `CLR` (looser) and fix the seam first.
+- **Rings rattle / fall slack:** lower `CLR` (tighter), or raise `CAP` for a deeper catch.
+- **More / fewer rings:** lower / raise `CLR`, or change `R_OUT` (head size) and `WALL`.
+- **More vortex spin:** raise `TWIST_SAFE` (it auto-limits per ring so it can't bind).
+- **Taller pop-up:** raise `RING_H` (more travel per ring).
+- **Bigger / smaller head:** `R_OUT` + `HEAD_D`. **Longer / shorter bookmark:** `SLOT_TOP`, `SLOT_BOT`, `HEAD_CY`, `W`, `TONGUE_W`.
 
 ## Regenerating
 
 ```bash
-pip install numpy manifold3d trimesh
-python3 generate_bookmark.py
+pip install numpy manifold3d trimesh matplotlib scipy shapely rtree
+python3 generate_bookmark.py     # the bookmark + flat fallback (+ verification)
+python3 generate_tests.py        # coupon + clearance comb
+python3 render_preview.py        # preview.png + preview_section.png
 ```
